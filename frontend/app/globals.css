@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --amber: #f0a500;
+  --amber2: #ffbe3d;
+  --amber-dim: rgba(240,165,0,0.12);
+  --border: rgba(255,255,255,0.07);
+  --border2: rgba(255,255,255,0.14);
+  --muted: #7a7870;
+  --muted2: #4a4840;
+}
+
+* { box-sizing: border-box; }
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+@keyframes load {
+  0%   { width: 0; }
+  30%  { width: 40%; }
+  70%  { width: 75%; }
+  100% { width: 100%; }
+}
