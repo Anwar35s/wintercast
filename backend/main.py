@@ -40,3 +40,4 @@ def debug():
         "HELIUS_KEY": "set" if os.environ.get("HELIUS_API_KEY") else "MISSING",
         "ANTHROPIC_KEY": "set" if os.environ.get("ANTHROPIC_API_KEY") else "MISSING",
     }
+# security update
