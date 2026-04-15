@@ -16,161 +16,137 @@ const ARCHETYPES = [
 export default function Home() {
   const [address, setAddress] = useState("")
   const [loading, setLoading] = useState(false)
-  const [error, setError] = useState("")
   const router = useRouter()
 
-  const handleAnalyse = async () => {
+  const handleAnalyse = () => {
     const addr = address.trim()
     if (!addr) return
     setLoading(true)
-    setError("")
-    try {
-      router.push(`/profile/${encodeURIComponent(addr)}`)
-    } catch {
-      setError("Invalid address. Please try again.")
-      setLoading(false)
-    }
+    router.push(`/profile/${encodeURIComponent(addr)}`)
   }
 
   return (
-    <main>
-      {/* Nav */}
-      <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-10 py-5 bg-[#080b0f]/85 backdrop-blur border-b border-white/7">
-        <div className="font-display font-extrabold text-xl tracking-tight">
-          Wallet<span className="text-[#f0a500]">DNA</span>
+    <main style={{ background: "#050810", minHeight: "100vh", color: "#e2eaf7", fontFamily: "var(--font-mono)" }}>
+      <div style={{ position: "fixed", inset: 0, pointerEvents: "none", zIndex: 0, background: "radial-gradient(ellipse 120% 60% at 50% -10%, rgba(96,165,250,0.07) 0%, transparent 70%)" }} />
+
+      <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 50, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "1.25rem 2.5rem", background: "rgba(5,8,16,0.85)", backdropFilter: "blur(16px)", borderBottom: "1px solid rgba(96,165,250,0.1)" }}>
+        <div style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "1.2rem", letterSpacing: "-0.02em" }}>
+          winter<span style={{ color: "#60a5fa" }}>cast</span>
         </div>
-        <div className="hidden md:flex gap-8 text-[#7a7870] text-xs tracking-widest">
-          <a href="#archetypes" className="hover:text-white transition-colors">ARCHETYPES</a>
-          <a href="#how" className="hover:text-white transition-colors">HOW IT WORKS</a>
+        <div style={{ display: "flex", gap: "2rem" }}>
+          {[["archetypes","Archetypes"],["how-it-works","How it works"]].map(([id,l]) => (
+            <a key={id} href={`#${id}`} style={{ color: "rgba(226,234,247,0.4)", textDecoration: "none", fontSize: "0.72rem", letterSpacing: "0.1em", textTransform: "uppercase" }}>{l}</a>
+          ))}
         </div>
-        <button
-          onClick={handleAnalyse}
-          className="bg-[#f0a500] text-black text-xs font-bold px-5 py-2 tracking-widest hover:opacity-85 transition-opacity"
-        >
-          ANALYSE WALLET
+        <button onClick={handleAnalyse} style={{ background: "#60a5fa", color: "#050810", border: "none", fontFamily: "var(--font-mono)", fontSize: "0.72rem", fontWeight: 700, padding: "0.5rem 1.25rem", letterSpacing: "0.08em", cursor: "pointer", textTransform: "uppercase" }}>
+          Analyse Wallet
         </button>
       </nav>
 
-      {/* Hero */}
-      <section className="min-h-screen flex flex-col items-center justify-center text-center px-4 pt-24 pb-16 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-100"
-          style={{
-            backgroundImage: "linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px)",
-            backgroundSize: "60px 60px",
-            maskImage: "radial-gradient(ellipse 80% 70% at 50% 50%, black 20%, transparent 100%)"
-          }}
-        />
-        <div className="absolute w-[600px] h-[600px] rounded-full pointer-events-none"
-          style={{ background: "radial-gradient(circle, rgba(240,165,0,0.06) 0%, transparent 70%)", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}
-        />
+      <section style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", padding: "8rem 2rem 4rem", position: "relative" }}>
+        <div style={{ position: "absolute", inset: 0, zIndex: 0, backgroundImage: "linear-gradient(rgba(96,165,250,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(96,165,250,0.04) 1px, transparent 1px)", backgroundSize: "50px 50px", maskImage: "radial-gradient(ellipse 80% 70% at 50% 50%, black 10%, transparent 100%)" }} />
 
-        <div className="relative z-10 flex flex-col items-center">
-          <div className="inline-flex items-center gap-2 border border-[#f0a500]/30 bg-[#f0a500]/10 text-[#ffbe3d] px-4 py-1.5 text-xs tracking-widest mb-8">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#f0a500] animate-pulse" />
-            LIVE ON ETH + SOLANA
+        <div style={{ position: "relative", zIndex: 1, display: "flex", flexDirection: "column", alignItems: "center" }}>
+          <div style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem", border: "1px solid rgba(96,165,250,0.25)", background: "rgba(96,165,250,0.08)", color: "#93c5fd", padding: "0.35rem 1rem", fontSize: "0.68rem", letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: "2rem" }}>
+            <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#60a5fa", display: "inline-block" }} />
+            The cold truth about every wallet
           </div>
 
-          <h1 className="font-display font-extrabold text-5xl md:text-7xl leading-[1.05] tracking-tight mb-6">
-            Your wallet tells<br />a story. <span className="text-[#f0a500]">Read it.</span>
+          <h1 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(2.8rem, 7vw, 5.5rem)", fontWeight: 800, lineHeight: 1.02, letterSpacing: "-0.03em", marginBottom: "1.5rem", color: "#e2eaf7" }}>
+            Every wallet<br />tells a story.<br /><span style={{ color: "#60a5fa" }}>We read it.</span>
           </h1>
-          <p className="text-[#7a7870] text-sm leading-8 max-w-lg mb-10 tracking-wide">
-            Enter any wallet address. WalletDNA analyses 30+ on-chain signals and generates a complete behavioural profile — archetype, win rate, predictions, and a shareable card.
+
+          <p style={{ color: "rgba(226,234,247,0.45)", fontSize: "0.88rem", lineHeight: 1.9, maxWidth: 480, marginBottom: "3rem" }}>
+            Paste any EVM or Solana address. Wintercast analyses 30+ on-chain signals and delivers a complete behavioural forecast — archetype, score, AI narrative, and next-move predictions.
           </p>
 
-          <div className="relative w-full max-w-xl mb-3">
+          <div style={{ position: "relative", width: "100%", maxWidth: 580, marginBottom: "0.75rem" }}>
             <input
               value={address}
               onChange={e => setAddress(e.target.value)}
               onKeyDown={e => e.key === "Enter" && handleAnalyse()}
               placeholder="0x... or Solana address"
-              className="w-full bg-[#0d1117] border border-white/14 text-[#e8e6e0] font-mono text-sm py-4 pl-5 pr-36 outline-none focus:border-[#f0a500] transition-colors placeholder:text-[#4a4840] tracking-wide"
+              style={{ width: "100%", background: "rgba(96,165,250,0.05)", border: "1px solid rgba(96,165,250,0.2)", color: "#e2eaf7", fontFamily: "var(--font-mono)", fontSize: "0.8rem", padding: "1.1rem 1.5rem", paddingRight: "140px", outline: "none", letterSpacing: "0.03em" }}
             />
-            <button
-              onClick={handleAnalyse}
-              disabled={loading}
-              className="absolute right-0 top-0 bottom-0 bg-[#f0a500] text-black font-mono text-xs font-bold px-6 tracking-widest hover:opacity-85 disabled:opacity-60 transition-opacity"
-            >
-              {loading ? "..." : "ANALYSE →"}
+            <button onClick={handleAnalyse} disabled={loading}
+              style={{ position: "absolute", right: 0, top: 0, bottom: 0, background: "#60a5fa", color: "#050810", border: "none", fontFamily: "var(--font-mono)", fontSize: "0.72rem", fontWeight: 700, padding: "0 1.5rem", cursor: "pointer", letterSpacing: "0.08em", textTransform: "uppercase" }}>
+              {loading ? "..." : "Analyse →"}
             </button>
           </div>
 
-          {error && <p className="text-red-400 text-xs mb-2">{error}</p>}
-
-          <p className="text-[#4a4840] text-xs tracking-widest">
-            No account needed. Try:{" "}
-            <span className="text-[#7a7870] cursor-pointer underline underline-offset-4 hover:text-[#f0a500]"
-              onClick={() => { setAddress("0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045"); }}>
+          <p style={{ color: "rgba(226,234,247,0.25)", fontSize: "0.68rem", letterSpacing: "0.08em" }}>
+            No account needed · Try:{" "}
+            <span style={{ color: "rgba(96,165,250,0.7)", cursor: "pointer", textDecoration: "underline", textUnderlineOffset: 3 }}
+              onClick={() => setAddress("0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045")}>
               vitalik.eth
             </span>
           </p>
 
-          <div className="flex gap-12 mt-16 pt-8 border-t border-white/7">
-            {[["2.4M+","WALLETS ANALYSED"],["30+","SIGNALS TRACKED"],["8","ARCHETYPES"],["EVM+SOL","CHAINS"]].map(([n,l]) => (
-              <div key={l} className="text-center">
-                <div className="font-display font-extrabold text-2xl text-[#f0a500]">{n}</div>
-                <div className="text-[#7a7870] text-xs tracking-widest mt-1">{l}</div>
+          <div style={{ display: "flex", gap: "3rem", marginTop: "4rem", paddingTop: "2rem", borderTop: "1px solid rgba(96,165,250,0.1)" }}>
+            {[["2.4M+","Wallets Analysed"],["30+","Signals Tracked"],["8","Archetypes"],["EVM+SOL","Chains"]].map(([n,l]) => (
+              <div key={l} style={{ textAlign: "center" }}>
+                <div style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "1.8rem", color: "#60a5fa" }}>{n}</div>
+                <div style={{ color: "rgba(226,234,247,0.35)", fontSize: "0.65rem", letterSpacing: "0.1em", textTransform: "uppercase", marginTop: "0.25rem" }}>{l}</div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Archetypes */}
-      <section id="archetypes" className="max-w-5xl mx-auto px-4 py-20">
-        <div className="text-[#f0a500] text-xs tracking-[0.15em] mb-3">// ARCHETYPES</div>
-        <h2 className="font-display font-extrabold text-4xl tracking-tight mb-3">Which type are you?</h2>
-        <p className="text-[#7a7870] text-sm leading-8 mb-10 max-w-lg">Every wallet falls into one of 8 behavioural patterns. Our AI identifies exactly which one — and how extreme.</p>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-white/7 border border-white/7">
+      <section id="archetypes" style={{ maxWidth: 1100, margin: "0 auto", padding: "6rem 2rem", position: "relative", zIndex: 1 }}>
+        <div style={{ color: "#60a5fa", fontSize: "0.68rem", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "0.75rem" }}>// Archetypes</div>
+        <h2 style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "clamp(1.8rem, 3vw, 2.8rem)", letterSpacing: "-0.02em", marginBottom: "0.75rem" }}>Which type are you?</h2>
+        <p style={{ color: "rgba(226,234,247,0.4)", fontSize: "0.82rem", lineHeight: 1.8, maxWidth: 480, marginBottom: "3rem" }}>Every wallet falls into one of 8 behavioural patterns. Our AI identifies exactly which one.</p>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))", gap: 1, background: "rgba(96,165,250,0.08)", border: "1px solid rgba(96,165,250,0.08)" }}>
           {ARCHETYPES.map(a => (
-            <div key={a.name} className="bg-[#0d1117] p-7 hover:bg-[#111820] transition-colors group cursor-pointer relative">
-              <div className="absolute top-0 left-0 right-0 h-[2px] bg-[#f0a500] scale-x-0 group-hover:scale-x-100 transition-transform origin-left" />
-              <div className="text-2xl mb-4">{a.icon}</div>
-              <div className="font-display font-bold text-sm mb-2">{a.name}</div>
-              <div className="text-[#7a7870] text-xs leading-6">{a.desc}</div>
-              <div className="inline-block mt-3 bg-[#f0a500]/10 text-[#ffbe3d] text-[10px] px-2 py-1 tracking-widest">{a.badge}</div>
+            <div key={a.name} style={{ background: "rgba(5,8,16,0.95)", padding: "2rem", cursor: "pointer", transition: "background 0.2s" }}
+              onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.background = "rgba(96,165,250,0.05)" }}
+              onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.background = "rgba(5,8,16,0.95)" }}>
+              <div style={{ fontSize: "1.5rem", marginBottom: "1rem" }}>{a.icon}</div>
+              <div style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "0.95rem", marginBottom: "0.5rem" }}>{a.name}</div>
+              <div style={{ color: "rgba(226,234,247,0.4)", fontSize: "0.72rem", lineHeight: 1.7 }}>{a.desc}</div>
+              <div style={{ display: "inline-block", marginTop: "1rem", background: "rgba(96,165,250,0.1)", color: "#93c5fd", fontSize: "0.6rem", padding: "0.25rem 0.6rem", letterSpacing: "0.1em" }}>{a.badge}</div>
             </div>
           ))}
         </div>
       </section>
 
-      {/* How it works */}
-      <section id="how" className="max-w-5xl mx-auto px-4 py-20">
-        <div className="text-[#f0a500] text-xs tracking-[0.15em] mb-3">// HOW IT WORKS</div>
-        <h2 className="font-display font-extrabold text-4xl tracking-tight mb-3">From address to intelligence</h2>
-        <p className="text-[#7a7870] text-sm leading-8 mb-10 max-w-lg">Paste any wallet. In seconds, our pipeline fetches, analyses, and profiles the complete on-chain history.</p>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/7 border border-white/7">
+      <section id="how-it-works" style={{ maxWidth: 1100, margin: "0 auto", padding: "6rem 2rem", position: "relative", zIndex: 1 }}>
+        <div style={{ color: "#60a5fa", fontSize: "0.68rem", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "0.75rem" }}>// How it works</div>
+        <h2 style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "clamp(1.8rem, 3vw, 2.8rem)", letterSpacing: "-0.02em", marginBottom: "0.75rem" }}>From address to forecast</h2>
+        <p style={{ color: "rgba(226,234,247,0.4)", fontSize: "0.82rem", lineHeight: 1.8, maxWidth: 480, marginBottom: "3rem" }}>Paste any wallet. In seconds, Wintercast reads the chain and delivers the cold truth.</p>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 1, background: "rgba(96,165,250,0.08)", border: "1px solid rgba(96,165,250,0.08)" }}>
           {[
-            ["STEP 01","Paste any address","EVM (0x...) or Solana. We auto-detect the chain and query all transaction history via Moralis & Helius APIs."],
-            ["STEP 02","AI analyses 30+ signals","Win rate, hold time, trade frequency, risk exposure, timing patterns, DeFi activity and more."],
-            ["STEP 03","Get your full profile","Archetype, score, AI-written narrative, next-move predictions and a shareable card — in under 10 seconds."],
-          ].map(([num,title,desc]) => (
-            <div key={num} className="bg-[#0d1117] p-10">
-              <div className="text-[#f0a500] text-xs tracking-[0.15em] mb-6">{num}</div>
-              <div className="font-display font-bold text-lg mb-3">{title}</div>
-              <div className="text-[#7a7870] text-xs leading-7">{desc}</div>
+            ["01","Paste any address","EVM or Solana. We auto-detect the chain and pull the full transaction history via Moralis & Helius."],
+            ["02","AI reads 30+ signals","Win rate, hold time, risk exposure, DeFi activity, timing patterns — all analysed in seconds."],
+            ["03","Get your forecast","Archetype, score, AI narrative, next-move predictions and a shareable card. Cold. Precise. Yours."],
+          ].map(([n,t,d]) => (
+            <div key={n} style={{ background: "rgba(5,8,16,0.95)", padding: "2.5rem 2rem" }}>
+              <div style={{ color: "#60a5fa", fontSize: "0.68rem", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "1.5rem" }}>Step {n}</div>
+              <div style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "1.05rem", marginBottom: "0.75rem" }}>{t}</div>
+              <div style={{ color: "rgba(226,234,247,0.4)", fontSize: "0.75rem", lineHeight: 1.8 }}>{d}</div>
             </div>
           ))}
         </div>
       </section>
 
-      {/* CTA */}
-      <div className="mx-4 mb-20">
-        <div className="max-w-5xl mx-auto bg-[#0d1117] border border-white/14 border-t-2 border-t-[#f0a500] p-20 text-center">
-          <h2 className="font-display font-extrabold text-4xl tracking-tight mb-3">Know every wallet.<br/>Know the market.</h2>
-          <p className="text-[#7a7870] text-sm mb-8">Free to use. No account required. Just paste and analyse.</p>
-          <button
-            onClick={() => { setAddress("0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045"); window.scrollTo({top:0,behavior:"smooth"}); }}
-            className="bg-[#f0a500] text-black font-mono text-sm font-bold px-10 py-4 tracking-widest hover:opacity-85 transition-opacity"
-          >
-            TRY DEMO PROFILE →
+      <div style={{ maxWidth: 1100, margin: "0 auto 6rem", padding: "0 2rem", position: "relative", zIndex: 1 }}>
+        <div style={{ background: "rgba(96,165,250,0.04)", border: "1px solid rgba(96,165,250,0.15)", borderTop: "2px solid #60a5fa", padding: "5rem 3rem", textAlign: "center" }}>
+          <h2 style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "clamp(1.8rem, 3vw, 3rem)", letterSpacing: "-0.02em", marginBottom: "1rem" }}>The cold truth<br />about every wallet.</h2>
+          <p style={{ color: "rgba(226,234,247,0.4)", fontSize: "0.85rem", marginBottom: "2rem" }}>Free to use. No account required.</p>
+          <button onClick={() => { setAddress("0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045"); window.scrollTo({ top: 0, behavior: "smooth" }) }}
+            style={{ background: "#60a5fa", color: "#050810", border: "none", fontFamily: "var(--font-mono)", fontSize: "0.82rem", fontWeight: 700, padding: "0.9rem 2.5rem", letterSpacing: "0.08em", cursor: "pointer", textTransform: "uppercase" }}>
+            Try Demo Profile →
           </button>
         </div>
       </div>
 
-      <footer className="max-w-5xl mx-auto px-4 py-8 border-t border-white/7 flex justify-between items-center">
-        <div className="font-display font-extrabold">Wallet<span className="text-[#f0a500]">DNA</span></div>
-        <div className="text-[#7a7870] text-xs tracking-widest">© 2025 WalletDNA</div>
+      <footer style={{ maxWidth: 1100, margin: "0 auto", padding: "2rem 2rem 4rem", borderTop: "1px solid rgba(96,165,250,0.08)", display: "flex", justifyContent: "space-between", alignItems: "center", position: "relative", zIndex: 1 }}>
+        <div style={{ fontFamily: "var(--font-display)", fontWeight: 800 }}>winter<span style={{ color: "#60a5fa" }}>cast</span></div>
+        <div style={{ color: "rgba(226,234,247,0.25)", fontSize: "0.68rem", letterSpacing: "0.08em" }}>© 2025 Wintercast · wintercast.io</div>
       </footer>
+
+      <style>{`* { box-sizing: border-box; margin: 0; padding: 0; } @media (max-width: 700px) { nav > div:nth-child(2) { display: none; } }`}</style>
     </main>
   )
 }
