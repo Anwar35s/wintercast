@@ -7,72 +7,91 @@ def extract_evm_features(raw_data: dict) -> WalletFeatures:
     transfers = raw_data.get("token_transfers", [])
     address = raw_data["address"]
 
+    total_txs = len(txs)
+
     if not txs:
         return _empty_features(address, "evm")
 
     # Wallet age
-    oldest = min(txs, key=lambda t: t.get("block_timestamp", "9999"))
-    oldest_date = _parse_date(oldest.get("block_timestamp", ""))
-    age_days = (datetime.now(timezone.utc) - oldest_date).days if oldest_date else 0
+    dates = []
+    for t in txs:
+        d = _parse_date(t.get("block_timestamp", ""))
+        if d:
+            dates.append(d)
+
+    age_days = 0
+    if dates:
+        oldest = min(dates)
+        age_days = (datetime.now(timezone.utc) - oldest).days
 
     # Trade frequency
     weeks = max(age_days / 7, 1)
-    freq_per_week = len(txs) / weeks
+    freq_per_week = round(total_txs / weeks, 2)
 
-    # Win rate: estimate based on value in vs value out for token transfers
-    buys = [t for t in transfers if _is_buy(t)]
-    sells = [t for t in transfers if not _is_buy(t)]
+    # Win rate estimate
+    buys = [t for t in transfers if _is_buy(t, address)]
+    sells = [t for t in transfers if not _is_buy(t, address)]
     win_rate = _estimate_win_rate(buys, sells)
 
-    # Average hold time (rough estimate from transfer timing)
+    # Average hold time
     avg_hold = _estimate_hold_time(transfers)
 
-    # Risk score: ratio of unknown/small tokens vs ETH/stablecoins
+    # Risk score
     risk_score = _estimate_risk(transfers)
 
-    # DeFi activity: % of txs interacting with known DeFi contracts
+    # DeFi activity
     defi_score = _estimate_defi(txs)
 
-    # Largest trade
-    values = [float(t.get("value", 0)) / 1e18 for t in txs if t.get("value")]
+    # Trade sizes (ETH value)
+    values = []
+    for t in txs:
+        try:
+            val = float(t.get("value", 0)) / 1e18
+            if val > 0:
+                values.append(val)
+        except (ValueError, TypeError):
+            pass
+
     largest = max(values) if values else 0
     avg_trade = sum(values) / len(values) if values else 0
+    eth_price = 2500  # rough estimate
 
     return WalletFeatures(
         address=address,
         chain="evm",
         wallet_age_days=age_days,
-        total_transactions=len(txs),
+        total_transactions=total_txs,
         win_rate=win_rate,
         avg_hold_days=avg_hold,
-        trade_frequency_per_week=round(freq_per_week, 2),
+        trade_frequency_per_week=freq_per_week,
         portfolio_risk_score=risk_score,
         defi_activity_score=defi_score,
-        rug_pull_count=0,  # TODO: cross-ref known rug tokens
-        largest_trade_usd=largest * 2500,  # rough ETH price
-        avg_trade_size_usd=avg_trade * 2500,
-        narrative_timing_score=0.5  # TODO: compare with narrative timelines
+        rug_pull_count=0,
+        largest_trade_usd=round(largest * eth_price, 2),
+        avg_trade_size_usd=round(avg_trade * eth_price, 2),
+        narrative_timing_score=0.5
     )
 
 
 def extract_solana_features(raw_data: dict) -> WalletFeatures:
     txs = raw_data.get("transactions", [])
     address = raw_data["address"]
+    total_txs = len(txs)
 
     if not txs:
         return _empty_features(address, "solana")
 
-    age_days = 365  # default until we parse timestamps
-    freq_per_week = len(txs) / max(age_days / 7, 1)
+    age_days = 365
+    freq_per_week = round(total_txs / max(age_days / 7, 1), 2)
 
     return WalletFeatures(
         address=address,
         chain="solana",
         wallet_age_days=age_days,
-        total_transactions=len(txs),
+        total_transactions=total_txs,
         win_rate=0.5,
         avg_hold_days=7.0,
-        trade_frequency_per_week=round(freq_per_week, 2),
+        trade_frequency_per_week=freq_per_week,
         portfolio_risk_score=0.5,
         defi_activity_score=0.4,
         rug_pull_count=0,
@@ -82,7 +101,7 @@ def extract_solana_features(raw_data: dict) -> WalletFeatures:
     )
 
 
-# ── helpers ──────────────────────────────────────────────────────────────────
+# ── helpers ───────────────────────────────────────────────────────────────────
 
 def _empty_features(address, chain):
     return WalletFeatures(
@@ -90,7 +109,8 @@ def _empty_features(address, chain):
         total_transactions=0, win_rate=0.5, avg_hold_days=0,
         trade_frequency_per_week=0, portfolio_risk_score=0.5,
         defi_activity_score=0, rug_pull_count=0,
-        largest_trade_usd=0, avg_trade_size_usd=0, narrative_timing_score=0.5
+        largest_trade_usd=0, avg_trade_size_usd=0,
+        narrative_timing_score=0.5
     )
 
 def _parse_date(ts: str):
@@ -99,14 +119,14 @@ def _parse_date(ts: str):
     except Exception:
         return None
 
-def _is_buy(transfer: dict) -> bool:
-    return transfer.get("to_address", "").lower() == transfer.get("address", "").lower()
+def _is_buy(transfer: dict, address: str) -> bool:
+    return transfer.get("to_address", "").lower() == address.lower()
 
 def _estimate_win_rate(buys, sells) -> float:
     if not buys:
         return 0.4
-    profitable = min(len(sells), len(buys))
-    return round(min(profitable / max(len(buys), 1) * 1.1, 0.95), 2)
+    ratio = len(sells) / max(len(buys), 1)
+    return round(min(ratio * 0.8 + 0.2, 0.95), 2)
 
 def _estimate_hold_time(transfers) -> float:
     if len(transfers) < 2:
@@ -121,19 +141,21 @@ def _estimate_hold_time(transfers) -> float:
 def _estimate_risk(transfers) -> float:
     if not transfers:
         return 0.5
-    # More unique tokens = higher risk
     unique_tokens = len(set(t.get("token_symbol", "") for t in transfers))
-    return round(min(unique_tokens / 50, 1.0), 2)
+    return round(min(unique_tokens / 30, 1.0), 2)
 
 def _estimate_defi(txs) -> float:
-    # Known DeFi contract prefixes (Uniswap, Aave, Compound, etc.)
     defi_contracts = {
-        "0x7a250d5630b4cf539739df2c5dacb4c659f2488d",  # Uniswap v2
-        "0xe592427a0aece92de3edee1f18e0157c05861564",  # Uniswap v3
-        "0x87870bca3f3fd6335c3f4ce8392d69350b4fa4e2",  # Aave v3
+        "0x7a250d5630b4cf539739df2c5dacb4c659f2488d",
+        "0xe592427a0aece92de3edee1f18e0157c05861564",
+        "0x87870bca3f3fd6335c3f4ce8392d69350b4fa4e2",
+        "0x68b3465833fb72a70ecdf485e0e4c7bd8665fc45",
+        "0x1111111254eeb25477b68fb85ed929f73a960582",
     }
+    if not txs:
+        return 0.0
     defi_count = sum(
         1 for t in txs
         if t.get("to_address", "").lower() in defi_contracts
     )
-    return round(min(defi_count / max(len(txs), 1) * 3, 1.0), 2)
+    return round(min(defi_count / max(len(txs), 1) * 5, 1.0), 2)
