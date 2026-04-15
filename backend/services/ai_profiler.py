@@ -1,9 +1,9 @@
-from openai import OpenAI
+import anthropic
 import os
 import json
 from models.wallet import WalletFeatures, WalletProfile
 
-client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
+client = anthropic.Anthropic(api_key=os.environ.get("ANTHROPIC_API_KEY"))
 
 ARCHETYPES = {
     "whale":   {"name": "The Whale",       "icon": "🐋"},
@@ -50,6 +50,7 @@ async def generate_profile(features: WalletFeatures) -> WalletProfile:
     risk_level = "HIGH" if features.portfolio_risk_score > 0.65 else "MEDIUM" if features.portfolio_risk_score > 0.35 else "LOW"
 
     prompt = f"""You are Wintercast, an AI that generates behavioural profiles for crypto wallets.
+The cold truth about every wallet — revealed.
 
 Wallet data:
 - Address: {features.address}
@@ -76,14 +77,13 @@ Return ONLY valid JSON, no markdown:
   ]
 }}"""
 
-    response = client.chat.completions.create(
-        model="gpt-4o",
-        messages=[{"role": "user", "content": prompt}],
+    message = client.messages.create(
+        model="claude-opus-4-5",
         max_tokens=1000,
-        temperature=0.7
+        messages=[{"role": "user", "content": prompt}]
     )
 
-    raw = response.choices[0].message.content
+    raw = message.content[0].text
     raw = raw.replace("```json", "").replace("```", "").strip()
     ai_data = json.loads(raw)
 
