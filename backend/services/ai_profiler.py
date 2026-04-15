@@ -1,27 +1,22 @@
-import anthropic
+from openai import OpenAI
 import os
 import json
-from dotenv import load_dotenv
 from models.wallet import WalletFeatures, WalletProfile
 
-load_dotenv()
-
-client = anthropic.Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
+client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
 
 ARCHETYPES = {
-    "whale":    {"name": "The Whale",       "icon": "🐋"},
-    "bot":      {"name": "The Bot",         "icon": "🤖"},
-    "degen":    {"name": "The Degen",       "icon": "🎰"},
-    "smart":    {"name": "Smart Money",     "icon": "🧠"},
-    "diamond":  {"name": "Diamond Hands",   "icon": "💎"},
-    "sniper":   {"name": "The Sniper",      "icon": "🎯"},
-    "flipper":  {"name": "The Flipper",     "icon": "🔄"},
-    "retail":   {"name": "Retail Follower", "icon": "🐟"},
+    "whale":   {"name": "The Whale",       "icon": "🐋"},
+    "bot":     {"name": "The Bot",         "icon": "🤖"},
+    "degen":   {"name": "The Degen",       "icon": "🎰"},
+    "smart":   {"name": "Smart Money",     "icon": "🧠"},
+    "diamond": {"name": "Diamond Hands",   "icon": "💎"},
+    "sniper":  {"name": "The Sniper",      "icon": "🎯"},
+    "flipper": {"name": "The Flipper",     "icon": "🔄"},
+    "retail":  {"name": "Retail Follower", "icon": "🐟"},
 }
 
-
 def classify_archetype(f: WalletFeatures) -> str:
-    """Rule-based archetype classification from features."""
     if f.avg_trade_size_usd > 500_000:
         return "whale"
     if f.trade_frequency_per_week > 100:
@@ -38,9 +33,7 @@ def classify_archetype(f: WalletFeatures) -> str:
         return "flipper"
     return "retail"
 
-
 def calculate_score(f: WalletFeatures) -> int:
-    """0–100 wallet intelligence score."""
     score = (
         f.win_rate * 40 +
         min(f.defi_activity_score * 20, 20) +
@@ -50,15 +43,13 @@ def calculate_score(f: WalletFeatures) -> int:
     )
     return max(1, min(int(score), 100))
 
-
 async def generate_profile(features: WalletFeatures) -> WalletProfile:
     archetype_key = classify_archetype(features)
     archetype = ARCHETYPES[archetype_key]
     score = calculate_score(features)
     risk_level = "HIGH" if features.portfolio_risk_score > 0.65 else "MEDIUM" if features.portfolio_risk_score > 0.35 else "LOW"
 
-    # Build prompt for Claude
-    prompt = f"""You are WalletDNA, an AI that generates behavioural profiles for crypto wallets.
+    prompt = f"""You are Wintercast, an AI that generates behavioural profiles for crypto wallets.
 
 Wallet data:
 - Address: {features.address}
@@ -73,26 +64,26 @@ Wallet data:
 - DeFi activity: {round(features.defi_activity_score * 100)}%
 - Rug pull count: {features.rug_pull_count}
 - Largest trade: ${features.largest_trade_usd:,.0f}
-- Avg trade size: ${features.avg_trade_size_usd:,.0f}
+- Average trade size: ${features.avg_trade_size_usd:,.0f}
 
-Return ONLY valid JSON with this exact structure:
+Return ONLY valid JSON, no markdown:
 {{
-  "narrative": "2-3 paragraph AI-written personality profile. Be specific, insightful, and reference the actual numbers. Use bold markdown for key phrases.",
+  "narrative": "2-3 paragraph cold precise personality profile. Reference actual numbers. Use **bold** for key phrases.",
   "predictions": [
-    {{"probability": 78, "text": "Specific prediction about likely next action based on patterns"}},
+    {{"probability": 78, "text": "Specific prediction about likely next action"}},
     {{"probability": 55, "text": "Second prediction"}},
     {{"probability": 38, "text": "Third prediction"}}
   ]
 }}"""
 
-    message = client.messages.create(
-        model="claude-opus-4-5",
+    response = client.chat.completions.create(
+        model="gpt-4o",
+        messages=[{"role": "user", "content": prompt}],
         max_tokens=1000,
-        messages=[{"role": "user", "content": prompt}]
+        temperature=0.7
     )
 
-    raw = message.content[0].text
-    # Strip markdown fences if present
+    raw = response.choices[0].message.content
     raw = raw.replace("```json", "").replace("```", "").strip()
     ai_data = json.loads(raw)
 
@@ -118,7 +109,7 @@ Return ONLY valid JSON with this exact structure:
         traits=traits,
         narrative=ai_data.get("narrative", ""),
         predictions=ai_data.get("predictions", []),
-        recent_activity=[],  # populated by fetcher in full impl
+        recent_activity=[],
         vs_average={
             "win_rate":   {"you": round(features.win_rate * 100), "avg": 38},
             "hold_days":  {"you": features.avg_hold_days,          "avg": 4},
