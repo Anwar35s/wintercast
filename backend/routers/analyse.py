@@ -63,3 +63,10 @@ async def resolve_ens(address: str) -> str | None:
 async def get_ens(address: str):
     name = await resolve_ens(address)
     return {"address": address, "ens": name}
+
+from services.ens_resolver import resolve_ens as _resolve_ens
+
+@router.get("/ens/v2/{address}")
+async def get_ens_v2(address: str):
+    name = await _resolve_ens(address)
+    return {"address": address, "ens": name}
