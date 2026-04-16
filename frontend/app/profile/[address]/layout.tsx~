@@ -1,0 +1,23 @@
+export async function generateMetadata({ params }: { params: { address: string } }) {
+  const address = decodeURIComponent(params.address)
+  const short = `${address.slice(0, 8)}...${address.slice(-6)}`
+  return {
+    title: `${short} — Wintercast Profile`,
+    description: `AI-generated wallet personality profile for ${short}. See archetype, win rate, predictions and more.`,
+    openGraph: {
+      title: `${short} — Wintercast Profile`,
+      description: `AI-generated wallet personality profile. See archetype, win rate, predictions and more.`,
+      url: `https://wintercast.io/profile/${address}`,
+      images: [`https://wintercast.io/og?address=${address}`],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${short} — Wintercast Profile`,
+      images: [`https://wintercast.io/og?address=${address}`],
+    },
+  }
+}
+
+export default function ProfileLayout({ children }: { children: React.ReactNode }) {
+  return children
+}
