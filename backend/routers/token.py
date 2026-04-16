@@ -13,31 +13,26 @@ ETHERSCAN_KEY = os.environ.get("ETHERSCAN_API_KEY")
 async def get_token(address: str, request: Request):
     headers = {"X-API-Key": MORALIS_KEY}
     meta, price_data, holders = {}, {}, []
-
     async with httpx.AsyncClient(timeout=20) as client:
         try:
             r = await client.get(f"https://deep-index.moralis.io/api/v2.2/erc20/metadata", headers=headers, params={"chain":"eth","addresses[0]":address})
             if r.status_code == 200 and r.json(): meta = r.json()[0]
-        except Exception: pass
-
+        except: pass
         try:
             r = await client.get(f"https://deep-index.moralis.io/api/v2.2/erc20/{address}/price", headers=headers, params={"chain":"eth"})
             if r.status_code == 200: price_data = r.json()
-        except Exception: pass
-
+        except: pass
         try:
             r = await client.get("https://api.etherscan.io/v2/api", params={"chainid":1,"module":"token","action":"tokenholderlist","contractaddress":address,"page":1,"offset":10,"apikey":ETHERSCAN_KEY})
             if r.status_code == 200 and r.json().get("status") == "1":
                 for h in r.json().get("result", []):
                     holders.append({"address": h.get("TokenHolderAddress",""), "balance": h.get("TokenHolderQuantity","0"), "percentage": 0})
-        except Exception: pass
-
+        except: pass
     price_usd = float(price_data.get("usdPrice", 0) or 0)
     total_supply = float(meta.get("total_supply_formatted", 1) or 1)
     for h in holders:
         try: h["percentage"] = round(float(h["balance"]) / total_supply * 100, 4)
         except: h["percentage"] = 0
-
     top_10_pct = sum(h["percentage"] for h in holders[:10])
     return {
         "success": True,
