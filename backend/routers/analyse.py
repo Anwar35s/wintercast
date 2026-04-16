@@ -46,3 +46,20 @@ async def analyse_wallet(request: Request, req: AnalyseRequest):
         raise HTTPException(status_code=400, detail=str(e))
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Analysis failed: {str(e)}")
+
+import httpx
+
+async def resolve_ens(address: str) -> str | None:
+    try:
+        async with httpx.AsyncClient(timeout=5) as client:
+            r = await client.get(f"https://api.ensideas.com/ens/resolve/{address}")
+            if r.status_code == 200:
+                return r.json().get("name")
+    except Exception:
+        pass
+    return None
+
+@router.get("/ens/{address}")
+async def get_ens(address: str):
+    name = await resolve_ens(address)
+    return {"address": address, "ens": name}
