@@ -62,7 +62,7 @@ export default function Home() {
       <nav style={{ position:"fixed",top:0,left:0,right:0,zIndex:50,display:"flex",alignItems:"center",justifyContent:"space-between",padding:"1.1rem 2rem",background:"rgba(5,8,16,0.85)",backdropFilter:"blur(16px)",borderBottom:"1px solid rgba(96,165,250,0.1)" }}>
         <div style={{ fontFamily:"var(--font-display)",fontWeight:800,fontSize:"1.2rem",letterSpacing:"-0.02em" }}>winter<span style={{ color:"#60a5fa" }}>cast</span></div>
         <div style={{ display:"flex",gap:"1.5rem" }}>
-          {[["/#archetypes","Archetypes"],["/#how-it-works","How it works"],["/whales","🐋 Whales"],["/compare","Compare"],["/pricing","Pricing"]].map(([href,label]) => (
+          {[["/#archetypes","Archetypes"],["/#how-it-works","How it works"],["/whales","🐋 Whales"],["/token","🔍 Tokens"],["/track","📡 Track"],["/compare","Compare"],["/pricing","Pricing"]].map(([href,label]) => (
             <a key={label} href={href} style={{ color:"rgba(226,234,247,0.4)",textDecoration:"none",fontSize:"0.72rem",letterSpacing:"0.08em",textTransform:"uppercase",transition:"color 0.2s" }}
               onMouseEnter={e=>(e.currentTarget.style.color="#60a5fa")}
               onMouseLeave={e=>(e.currentTarget.style.color="rgba(226,234,247,0.4)")}>
