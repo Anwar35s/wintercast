@@ -1,5 +1,6 @@
 import httpx
 import os
+from datetime import datetime, timezone
 
 ETHERSCAN_KEY = os.environ.get("ETHERSCAN_API_KEY")
 HELIUS_KEY = os.environ.get("HELIUS_API_KEY")
@@ -13,10 +14,8 @@ KNOWN_LABELS = {
     "0x47ac0fb4f2d84898e4d9e7b4dab3c24507a6d503": "Binance 8",
     "0xf977814e90da44bfa03b6295a0616a897441acec": "Binance 20",
     "0xda9dfa130df4de4673b89022ee50ff26f6ea73cf": "Kraken",
-    "0x0a869d79a7052c7f1b55a8ebabbea3420f0d1e13": "Kraken 2",
     "0xd8da6bf26964af9d7eed9e03e53415d37aa96045": "Vitalik.eth",
     "0x21a31ee1afc51d94c2efccaa2092ad1028285549": "Binance 15",
-    "0xdfd5293d8e347dfe59e90efd55b2956a1343963d": "Binance 16",
 }
 
 WHALE_ADDRESSES = [
@@ -25,47 +24,39 @@ WHALE_ADDRESSES = [
     "0x47ac0Fb4F2D84898e4D9E7b4DaB3C24507a6D503",
     "0xF977814e90dA44bFA03b6295A0616a897441acEc",
     "0xDA9dfA130Df4dE4673b89022EE50ff26f6EA73Cf",
-    "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045",
 ]
 
 SOL_WHALE_ADDRESSES = [
     "5RbCuWSgCLLGHiqQ7yfvBYrmxDZghZnfybFzQzXJk2hU",
-    "9WzDXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAWWM",
-    "DjVE6JNiYqPL2QXyCUUh8rNjHrbz9hXHNYt99MQ59qw1",
 ]
 
-async def fetch_eth_moves(address: str, chain: str = "eth") -> list:
+ETHERSCAN_V2 = "https://api.etherscan.io/v2/api"
+
+async def fetch_eth_moves(address: str, chain_id: int, chain: str) -> list:
     moves = []
-    base_url = "https://api.etherscan.io/api" if chain == "eth" else "https://api.basescan.org/api"
-    
     async with httpx.AsyncClient(timeout=15) as client:
         # Native ETH transfers
-        r = await client.get(base_url, params={
+        r = await client.get(ETHERSCAN_V2, params={
+            "chainid": chain_id,
             "module": "account",
             "action": "txlist",
             "address": address,
-            "startblock": 0,
-            "endblock": 99999999,
             "page": 1,
             "offset": 10,
             "sort": "desc",
             "apikey": ETHERSCAN_KEY
         })
-        if r.status_code == 200:
-            data = r.json()
-            for tx in data.get("result", []):
+        if r.status_code == 200 and r.json().get("status") == "1":
+            for tx in r.json().get("result", []):
                 try:
-                    if not isinstance(tx, dict):
-                        continue
                     value_eth = int(tx.get("value", 0)) / 1e18
                     value_usd = value_eth * ETH_PRICE
                     if value_usd < WHALE_THRESHOLD_USD:
                         continue
+                    ts = int(tx.get("timeStamp", 0))
+                    timestamp = datetime.fromtimestamp(ts, tz=timezone.utc).isoformat() if ts else ""
                     from_addr = tx.get("from", "").lower()
                     to_addr = tx.get("to", "").lower()
-                    ts = int(tx.get("timeStamp", 0))
-                    from datetime import datetime, timezone
-                    timestamp = datetime.fromtimestamp(ts, tz=timezone.utc).isoformat() if ts else ""
                     moves.append({
                         "hash": tx.get("hash", ""),
                         "chain": chain,
@@ -81,8 +72,9 @@ async def fetch_eth_moves(address: str, chain: str = "eth") -> list:
                 except Exception:
                     continue
 
-        # ERC20 token transfers (stablecoins)
-        r2 = await client.get(base_url, params={
+        # ERC20 token transfers
+        r2 = await client.get(ETHERSCAN_V2, params={
+            "chainid": chain_id,
             "module": "account",
             "action": "tokentx",
             "address": address,
@@ -91,17 +83,15 @@ async def fetch_eth_moves(address: str, chain: str = "eth") -> list:
             "sort": "desc",
             "apikey": ETHERSCAN_KEY
         })
-        if r2.status_code == 200:
+        if r2.status_code == 200 and r2.json().get("status") == "1":
             for tx in r2.json().get("result", []):
                 try:
-                    if not isinstance(tx, dict):
-                        continue
                     symbol = tx.get("tokenSymbol", "")
                     decimals = int(tx.get("tokenDecimal", 18) or 18)
                     amount = int(tx.get("value", 0)) / (10 ** decimals)
-                    if symbol in ["USDT", "USDC", "DAI", "BUSD", "USDE"]:
+                    if symbol in ["USDT", "USDC", "DAI", "BUSD", "USDE", "FDUSD"]:
                         value_usd = amount
-                    elif symbol in ["WETH", "cbETH", "stETH"]:
+                    elif symbol in ["WETH", "cbETH", "stETH", "weETH"]:
                         value_usd = amount * ETH_PRICE
                     elif symbol == "WBTC":
                         value_usd = amount * 60000
@@ -109,11 +99,10 @@ async def fetch_eth_moves(address: str, chain: str = "eth") -> list:
                         continue
                     if value_usd < WHALE_THRESHOLD_USD:
                         continue
+                    ts = int(tx.get("timeStamp", 0))
+                    timestamp = datetime.fromtimestamp(ts, tz=timezone.utc).isoformat() if ts else ""
                     from_addr = tx.get("from", "").lower()
                     to_addr = tx.get("to", "").lower()
-                    ts = int(tx.get("timeStamp", 0))
-                    from datetime import datetime, timezone
-                    timestamp = datetime.fromtimestamp(ts, tz=timezone.utc).isoformat() if ts else ""
                     moves.append({
                         "hash": tx.get("hash", ""),
                         "chain": chain,
@@ -130,18 +119,16 @@ async def fetch_eth_moves(address: str, chain: str = "eth") -> list:
                     continue
     return moves
 
-
 async def fetch_recent_whale_moves() -> list:
     all_moves = []
-    async with httpx.AsyncClient(timeout=30) as client:
-        for address in WHALE_ADDRESSES:
-            try:
-                eth_moves = await fetch_eth_moves(address, "eth")
-                all_moves.extend(eth_moves)
-                base_moves = await fetch_eth_moves(address, "base")
-                all_moves.extend(base_moves)
-            except Exception:
-                continue
+    for address in WHALE_ADDRESSES:
+        try:
+            eth_moves = await fetch_eth_moves(address, 1, "eth")
+            all_moves.extend(eth_moves)
+            base_moves = await fetch_eth_moves(address, 8453, "base")
+            all_moves.extend(base_moves)
+        except Exception:
+            continue
 
     seen = set()
     unique = []
@@ -152,7 +139,6 @@ async def fetch_recent_whale_moves() -> list:
 
     unique.sort(key=lambda x: x["value_usd"], reverse=True)
     return unique[:20]
-
 
 async def fetch_solana_whale_moves() -> list:
     if not HELIUS_KEY:
@@ -167,15 +153,12 @@ async def fetch_solana_whale_moves() -> list:
                 )
                 if r.status_code != 200:
                     continue
-                txs = r.json() if isinstance(r.json(), list) else []
-                for tx in txs:
-                    native_transfers = tx.get("nativeTransfers", [])
-                    for nt in native_transfers:
+                for tx in (r.json() if isinstance(r.json(), list) else []):
+                    for nt in tx.get("nativeTransfers", []):
                         amount_sol = nt.get("amount", 0) / 1e9
                         value_usd = amount_sol * SOL_PRICE
                         if value_usd < WHALE_THRESHOLD_USD:
                             continue
-                        from datetime import datetime, timezone
                         ts = tx.get("timestamp", 0)
                         timestamp = datetime.fromtimestamp(ts, tz=timezone.utc).isoformat() if ts else ""
                         moves.append({
