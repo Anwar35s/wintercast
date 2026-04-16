@@ -41,5 +41,5 @@ def debug():
         "ANTHROPIC_KEY": "set" if os.environ.get("ANTHROPIC_API_KEY") else "MISSING",
     }
 
-from routers import whales as whales_router
-app.include_router(whales_router.router, prefix="/api")
+from routers import portfolio as portfolio_router
+app.include_router(portfolio_router.router, prefix="/api")
