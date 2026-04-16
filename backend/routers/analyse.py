@@ -70,3 +70,4 @@ from services.ens_resolver import resolve_ens as _resolve_ens
 async def get_ens_v2(address: str):
     name = await _resolve_ens(address)
     return {"address": address, "ens": name}
+
