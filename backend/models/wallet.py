@@ -1,36 +1,40 @@
 from pydantic import BaseModel
-from typing import Optional
+from typing import Optional, Dict
 
 class WalletFeatures(BaseModel):
     address: str
-    chain: str                    # "evm" or "solana"
+    chain: str
     wallet_age_days: int
     total_transactions: int
-    win_rate: float               # 0.0 - 1.0
+    win_rate: float
     avg_hold_days: float
     trade_frequency_per_week: float
-    portfolio_risk_score: float   # 0.0 - 1.0
-    defi_activity_score: float    # 0.0 - 1.0
+    portfolio_risk_score: float
+    defi_activity_score: float
     rug_pull_count: int
     largest_trade_usd: float
     avg_trade_size_usd: float
-    narrative_timing_score: float # how early they enter narratives
+    narrative_timing_score: float
+    chain_activity: Dict[str, int] = {}
+    primary_chain: str = "eth"
 
 class WalletProfile(BaseModel):
     address: str
     chain: str
     archetype: str
     archetype_icon: str
-    score: int                    # 0 - 100
+    score: int
     win_rate_pct: int
     avg_hold_days: float
     total_trades: int
-    risk_level: str               # LOW / MEDIUM / HIGH
+    risk_level: str
     traits: dict
     narrative: str
     predictions: list
     recent_activity: list
     vs_average: dict
+    chain_activity: Dict[str, int] = {}
+    primary_chain: str = "eth"
 
 class AnalyseRequest(BaseModel):
     address: str
