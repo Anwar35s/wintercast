@@ -109,7 +109,7 @@ export default function Home() {
       </nav>
 
       {/* Hero */}
-      <section style={{ minHeight:"100vh",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",textAlign:"center",padding:"5rem 1.25rem 3rem",position:"relative" }}>
+      <section style={{ minHeight:"100vh",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",textAlign:"center",padding:"4rem 1.25rem 2rem",position:"relative" }}>
         <div style={{ position:"absolute",inset:0,zIndex:0,backgroundImage:"linear-gradient(rgba(96,165,250,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(96,165,250,0.04) 1px, transparent 1px)",backgroundSize:"50px 50px",maskImage:"radial-gradient(ellipse 80% 70% at 50% 50%, black 10%, transparent 100%)" }} />
         <div style={{ position:"relative",zIndex:1,display:"flex",flexDirection:"column",alignItems:"center",width:"100%",maxWidth:600 }}>
           <div style={{ display:"inline-flex",alignItems:"center",gap:"0.5rem",border:"1px solid rgba(96,165,250,0.25)",background:"rgba(96,165,250,0.08)",color:"#93c5fd",padding:"0.35rem 1rem",fontSize:"0.65rem",letterSpacing:"0.12em",textTransform:"uppercase",marginBottom:"1.5rem" }}>
@@ -217,7 +217,7 @@ export default function Home() {
         <div style={{ color:"#60a5fa",fontSize:"0.62rem",letterSpacing:"0.15em",textTransform:"uppercase",marginBottom:"0.5rem" }}>// Archetypes</div>
         <h2 style={{ fontFamily:"var(--font-display)",fontWeight:800,fontSize:"clamp(1.6rem,4vw,2.5rem)",letterSpacing:"-0.02em",marginBottom:"0.75rem" }}>Which type are you?</h2>
         <p style={{ color:"rgba(226,234,247,0.4)",fontSize:"0.8rem",lineHeight:1.8,maxWidth:480,marginBottom:"2.5rem" }}>Every wallet falls into one of 8 behavioural patterns.</p>
-        <div style={{ display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(200px,1fr))",gap:1,background:"rgba(96,165,250,0.08)",border:"1px solid rgba(96,165,250,0.08)" }}>
+        <div style={{ display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(220px,1fr))",gap:1,background:"rgba(96,165,250,0.08)",border:"1px solid rgba(96,165,250,0.08)" }}>
           {ARCHETYPES.map(a=>(
             <div key={a.name} style={{ background:"rgba(5,8,16,0.95)",padding:"1.5rem",cursor:"pointer" }}
               onMouseEnter={e=>(e.currentTarget as HTMLDivElement).style.background="rgba(96,165,250,0.05)"}
