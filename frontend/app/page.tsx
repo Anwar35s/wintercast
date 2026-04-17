@@ -109,14 +109,14 @@ export default function Home() {
       </nav>
 
       {/* Hero */}
-      <section style={{ minHeight:"100vh",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",textAlign:"center",padding:"6rem 1.25rem 4rem",position:"relative" }}>
+      <section style={{ minHeight:"100vh",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",textAlign:"center",padding:"5rem 1.25rem 3rem",position:"relative" }}>
         <div style={{ position:"absolute",inset:0,zIndex:0,backgroundImage:"linear-gradient(rgba(96,165,250,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(96,165,250,0.04) 1px, transparent 1px)",backgroundSize:"50px 50px",maskImage:"radial-gradient(ellipse 80% 70% at 50% 50%, black 10%, transparent 100%)" }} />
         <div style={{ position:"relative",zIndex:1,display:"flex",flexDirection:"column",alignItems:"center",width:"100%",maxWidth:600 }}>
           <div style={{ display:"inline-flex",alignItems:"center",gap:"0.5rem",border:"1px solid rgba(96,165,250,0.25)",background:"rgba(96,165,250,0.08)",color:"#93c5fd",padding:"0.35rem 1rem",fontSize:"0.65rem",letterSpacing:"0.12em",textTransform:"uppercase",marginBottom:"1.5rem" }}>
             <span style={{ width:6,height:6,borderRadius:"50%",background:"#60a5fa",display:"inline-block",animation:"pulse 2s infinite" }} />
             Free during beta · EVM + Solana
           </div>
-          <h1 style={{ fontFamily:"var(--font-display)",fontSize:"clamp(2.4rem,6vw,4.2rem)",fontWeight:800,lineHeight:1.02,letterSpacing:"-0.03em",marginBottom:"1.25rem" }}>
+          <h1 style={{ fontFamily:"var(--font-display)",fontSize:"clamp(2rem,4vw,3.2rem)",fontWeight:800,lineHeight:1.02,letterSpacing:"-0.03em",marginBottom:"1.25rem" }}>
             Every wallet<br />tells a story.<br /><span style={{ color:"#60a5fa" }}>We read it.</span>
           </h1>
           <p style={{ color:"rgba(226,234,247,0.45)",fontSize:"clamp(0.78rem,2.5vw,0.88rem)",lineHeight:1.9,maxWidth:440,marginBottom:"2rem" }}>
