@@ -116,7 +116,7 @@ export default function Home() {
             <span style={{ width:6,height:6,borderRadius:"50%",background:"#60a5fa",display:"inline-block",animation:"pulse 2s infinite" }} />
             Free during beta · EVM + Solana
           </div>
-          <h1 style={{ fontFamily:"var(--font-display)",fontSize:"clamp(2.4rem,8vw,5.5rem)",fontWeight:800,lineHeight:1.02,letterSpacing:"-0.03em",marginBottom:"1.25rem" }}>
+          <h1 style={{ fontFamily:"var(--font-display)",fontSize:"clamp(2.4rem,6vw,4.2rem)",fontWeight:800,lineHeight:1.02,letterSpacing:"-0.03em",marginBottom:"1.25rem" }}>
             Every wallet<br />tells a story.<br /><span style={{ color:"#60a5fa" }}>We read it.</span>
           </h1>
           <p style={{ color:"rgba(226,234,247,0.45)",fontSize:"clamp(0.78rem,2.5vw,0.88rem)",lineHeight:1.9,maxWidth:440,marginBottom:"2rem" }}>
