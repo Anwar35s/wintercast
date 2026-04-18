@@ -56,7 +56,7 @@ export default function Home() {
   const short = (addr: string) => `${addr.slice(0,6)}...${addr.slice(-4)}`
   const formatUSD = (n: number) => n>=1_000_000?`$${(n/1_000_000).toFixed(1)}M`:n>=1_000?`$${(n/1_000).toFixed(0)}K`:`$${n.toFixed(0)}`
 
-  const NAV_LINKS = [["/whales","🐋 Whales"],["/token","🔍 Tokens"],["/track","📡 Track"],["/compare","Compare"],["/pricing","Pricing"]]
+  const NAV_LINKS = [["/whales","🐋 Whales"],["/token","🔍 Tokens"],["/track","📡 Track"],["/gas","⛽ Gas"],["/leaderboard","🏆 Board"],["/copy","📋 Copy"],["/compare","Compare"],["/pricing","Pricing"]]
 
   return (
     <main style={{ background:"#050810",minHeight:"100vh",color:"#e2eaf7",fontFamily:"var(--font-mono)" }}>
@@ -273,11 +273,11 @@ export default function Home() {
       <footer style={{ maxWidth:1100,margin:"0 auto",padding:"1.5rem 1.25rem 3rem",borderTop:"1px solid rgba(96,165,250,0.08)",display:"flex",justifyContent:"space-between",alignItems:"center",flexWrap:"wrap",gap:"1rem",position:"relative",zIndex:1 }}>
         <div style={{ fontFamily:"var(--font-display)",fontWeight:800 }}>winter<span style={{ color:"#60a5fa" }}>cast</span></div>
         <div style={{ display:"flex",gap:"1.5rem",flexWrap:"wrap" }}>
-          {[["/whales","Whales"],["/token","Tokens"],["/track","Track"],["/compare","Compare"],["/pricing","Pricing"],["mailto:hello@wintercast.io","Contact"]].map(([href,label])=>(
+          {[["/whales","Whales"],["/token","Tokens"],["/track","Track"],["/gas","Gas"],["/leaderboard","Board"],["/copy","Copy"],["/compare","Compare"],["/pricing","Pricing"],["mailto:hello@wintercast.io","Contact"]].map(([href,label])=>(
             <a key={label} href={href} style={{ color:"rgba(226,234,247,0.3)",fontSize:"0.65rem",letterSpacing:"0.08em",textDecoration:"none" }}>{label}</a>
           ))}
         </div>
-        <div style={{ color:"rgba(226,234,247,0.2)",fontSize:"0.62rem" }}>© 2025 Wintercast</div>
+        <div style={{ color:"rgba(226,234,247,0.2)",fontSize:"0.62rem" }}>© 2026 Wintercast</div>
       </footer>
 
       <style>{`
