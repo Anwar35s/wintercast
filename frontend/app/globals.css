@@ -1,27 +1,69 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #050810;
+  color: #e2eaf7;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+input, button, textarea, select {
+  font-family: inherit;
+}
+
+a {
+  color: inherit;
+}
+
+/* Mobile-first responsive utilities */
+@media (max-width: 768px) {
+  .hide-mobile { display: none !important; }
+  .grid-2-col { grid-template-columns: 1fr !important; }
+  .grid-3-col { grid-template-columns: 1fr !important; }
+  .grid-4-col { grid-template-columns: repeat(2, 1fr) !important; }
+  .px-mobile { padding-left: 1rem !important; padding-right: 1rem !important; }
+  .text-sm-mobile { font-size: 0.75rem !important; }
+  .h1-mobile { font-size: 2rem !important; }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: #050810; }
+::-webkit-scrollbar-thumb { background: rgba(96,165,250,0.3); border-radius: 2px; }
+
+/* Selection */
+::selection { background: rgba(96,165,250,0.2); color: #e2eaf7; }
+
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+
+/* Chain-specific accent colors */
 :root {
-  --amber: #f0a500;
-  --amber2: #ffbe3d;
-  --amber-dim: rgba(240,165,0,0.12);
-  --border: rgba(255,255,255,0.07);
-  --border2: rgba(255,255,255,0.14);
-  --muted: #7a7870;
-  --muted2: #4a4840;
+  --eth: #627eea;
+  --sol: #9945ff;
+  --btc: #f7931a;
+  --base: #0052ff;
+  --bnb: #f0b90b;
+  --matic: #8247e5;
+  --arb: #28a0f0;
 }
 
-* { box-sizing: border-box; }
-
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.3; }
-}
-
-@keyframes load {
-  0%   { width: 0; }
-  30%  { width: 40%; }
-  70%  { width: 75%; }
-  100% { width: 100%; }
-}
+/* Chain badge styles */
+.chain-eth { color: #627eea; border-color: rgba(98,126,234,0.3); background: rgba(98,126,234,0.1); }
+.chain-sol { color: #9945ff; border-color: rgba(153,69,255,0.3); background: rgba(153,69,255,0.1); }
+.chain-base { color: #0052ff; border-color: rgba(0,82,255,0.3); background: rgba(0,82,255,0.1); }
+.chain-bsc { color: #f0b90b; border-color: rgba(240,185,11,0.3); background: rgba(240,185,11,0.1); }
+.chain-polygon { color: #8247e5; border-color: rgba(130,71,229,0.3); background: rgba(130,71,229,0.1); }
+.chain-arbitrum { color: #28a0f0; border-color: rgba(40,160,240,0.3); background: rgba(40,160,240,0.1); }
