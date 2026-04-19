@@ -8,9 +8,22 @@ async def fetch_evm_wallet(address: str) -> dict:
     headers = {"X-API-Key": MORALIS_KEY}
     
     async with httpx.AsyncClient(timeout=30) as client:
+        # Get real transaction count from stats endpoint
+        total_tx_count = 0
+        try:
+            stats_r = await client.get(
+                f"{BASE_URL}/wallets/{address}/stats",
+                headers=headers,
+                params={"chain": "eth"}
+            )
+            if stats_r.status_code == 200:
+                stats = stats_r.json()
+                total_tx_count = int(stats.get("transactions", {}).get("total", 0) or 0)
+        except:
+            pass
+
         # Fetch up to 500 transactions (5 pages of 100)
         all_txs = []
-        total_tx_count = 0
         cursor = None
         for i in range(5):
             params = {"chain": "eth", "limit": 100}
@@ -22,8 +35,6 @@ async def fetch_evm_wallet(address: str) -> dict:
                 params=params
             )
             data = r.json()
-            if i == 0:
-                total_tx_count = data.get("total") or 0
             results = data.get("result", [])
             all_txs.extend(results)
             cursor = data.get("cursor")
