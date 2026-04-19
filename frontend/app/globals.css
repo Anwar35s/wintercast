@@ -71,3 +71,15 @@ a {
 body {
   background: #0a0520 !important;
 }
+
+:root {
+  --accent: #9945ff;
+  --accent-light: #c084fc;
+  --bg-primary: #0a0520;
+  --bg-nav: rgba(10,5,32,0.9);
+  --border-accent: rgba(153,69,255,0.2);
+}
+
+body {
+  background: #0a0520 !important;
+}
