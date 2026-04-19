@@ -76,6 +76,21 @@ export default function Home() {
           <p style={{color:"rgba(241,245,249,0.25)",fontSize:"0.65rem",letterSpacing:"0.06em",marginBottom:"0.75rem"}}>
             Try:{" "}{DEMO.map((w,i)=><span key={w.address}><span style={{color:"rgba(192,132,252,0.7)",cursor:"pointer",textDecoration:"underline",textUnderlineOffset:3}} onClick={()=>setAddr(w.address)}>{w.label}</span>{i<DEMO.length-1&&<span style={{color:"rgba(241,245,249,0.2)"}}> · </span>}</span>)}
           </p>
+          {gas && (
+            <div style={{display:"flex",gap:"1.5rem",flexWrap:"wrap",justifyContent:"center",background:"rgba(153,69,255,0.06)",border:"1px solid rgba(153,69,255,0.15)",padding:"0.75rem 1.5rem",borderRadius:8,fontSize:"0.7rem",marginTop:"0.5rem"}}>
+              <div style={{display:"flex",alignItems:"center",gap:"0.4rem"}}>
+                <span style={{width:6,height:6,borderRadius:"50%",background:"#4ade80",display:"inline-block",animation:"pulse 2s infinite"}}/>
+                <span style={{color:"rgba(241,245,249,0.4)"}}>ETH Gas:</span>
+                <span style={{color:"#4ade80",fontWeight:700}}>{gas.eth?.standard||"—"} Gwei</span>
+              </div>
+              <div><span style={{color:"rgba(241,245,249,0.4)"}}>ETH: </span><span style={{color:"#627eea",fontWeight:700}}>${gas.eth_price?.toLocaleString()||"—"}</span></div>
+              <div><span style={{color:"rgba(241,245,249,0.4)"}}>SOL: </span><span style={{color:"#9945ff",fontWeight:700}}>${gas.sol_price?.toLocaleString()||"—"}</span></div>
+              <div><span style={{color:"rgba(241,245,249,0.4)"}}>TPS: </span><span style={{color:"#c084fc",fontWeight:700}}>{gas.solana?.tps?.toLocaleString()||"—"}</span></div>
+              <a href="/gas" style={{color:"rgba(241,245,249,0.3)",textDecoration:"none",fontSize:"0.62rem"}}>Full Tracker →</a>
+            </div>
+          )}
+          <p style={{display:"none"}}>
+          </p>
           {pp&&<div style={{display:"flex",alignItems:"center",gap:"0.75rem",background:"rgba(153,69,255,0.1)",border:"1px solid rgba(153,69,255,0.25)",padding:"0.65rem 1rem",width:"100%",maxWidth:560,marginBottom:"0.5rem",borderRadius:6}}>
             <span>💼</span>
             <div style={{flex:1,fontSize:"0.7rem",color:"rgba(241,245,249,0.6)"}}>Portfolio: <span style={{color:"#f1f5f9",fontFamily:"var(--font-display)",fontWeight:700}}>${pp.total_usd.toLocaleString(undefined,{maximumFractionDigits:0})}</span> · <span style={{color:"#f1f5f9"}}>{pp.tokens} tokens</span></div>
