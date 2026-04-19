@@ -34,6 +34,7 @@ export default function Home() {
   useEffect(()=>{
     fetch(`${API}/api/recent`).then(r=>r.json()).then(d=>setRecent(d.recent||[])).catch(()=>{})
     fetch(`${API}/api/whales`).then(r=>r.json()).then(d=>setWhales((d.moves||[]).slice(0,4))).catch(()=>{})
+    fetch(`${API}/api/gas`).then(r=>r.json()).then(d=>{ if(d.success) setGas(d.gas) }).catch(()=>{})
   },[])
   const go = () => { if(!addr.trim())return; setLoading(true); router.push(`/profile/${encodeURIComponent(addr.trim())}`) }
   const fmt = (n:number) => n>=1e6?`$${(n/1e6).toFixed(1)}M`:n>=1000?`$${(n/1000).toFixed(0)}K`:`$${n.toFixed(0)}`
