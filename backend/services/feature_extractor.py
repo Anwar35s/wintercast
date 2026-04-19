@@ -6,7 +6,7 @@ def extract_evm_features(raw_data: dict) -> WalletFeatures:
     txs = raw_data.get("transactions", [])
     transfers = raw_data.get("token_transfers", [])
     address = raw_data["address"]
-    total_txs = len(txs)
+    total_txs = raw_data.get("total_tx_count") or len(txs)
 
     if not txs:
         return _empty_features(address, "evm")
@@ -74,7 +74,7 @@ def extract_evm_features(raw_data: dict) -> WalletFeatures:
 def extract_solana_features(raw_data: dict) -> WalletFeatures:
     txs = raw_data.get("transactions", [])
     address = raw_data["address"]
-    total_txs = len(txs)
+    total_txs = raw_data.get("total_tx_count") or len(txs)
 
     if not txs:
         return _empty_features(address, "solana")
