@@ -2,12 +2,12 @@
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 
-const ICE = "#60a5fa"
-const BG = "#050810"
-const BG2 = "rgba(96,165,250,0.04)"
-const BORDER = "rgba(96,165,250,0.12)"
+const ICE = "#9945ff"
+const BG = "#0a0520"
+const BG2 = "rgba(153,69,255,0.04)"
+const BORDER = "rgba(153,69,255,0.12)"
 const TEXT = "#e2eaf7"
-const MUTED = "rgba(226,234,247,0.4)"
+const MUTED = "rgba(241,245,249,0.4)"
 const API_URL = "https://wintercast-production.up.railway.app"
 
 export default function TrackPage() {
@@ -59,7 +59,7 @@ export default function TrackPage() {
   return (
     <main style={{ background:BG,minHeight:"100vh",color:TEXT,fontFamily:"var(--font-mono)" }}>
       <div style={{ position:"fixed",inset:0,pointerEvents:"none",zIndex:0,background:"radial-gradient(ellipse 120% 60% at 50% -10%, rgba(96,165,250,0.07) 0%, transparent 70%)" }} />
-      <nav style={{ position:"fixed",top:0,left:0,right:0,zIndex:50,display:"flex",alignItems:"center",justifyContent:"space-between",padding:"1.1rem 2rem",background:"rgba(5,8,16,0.9)",backdropFilter:"blur(16px)",borderBottom:`1px solid ${BORDER}` }}>
+      <nav style={{ position:"fixed",top:0,left:0,right:0,zIndex:50,display:"flex",alignItems:"center",justifyContent:"space-between",padding:"1.1rem 2rem",background:"rgba(10,5,32,0.9)",backdropFilter:"blur(16px)",borderBottom:`1px solid ${BORDER}` }}>
         <button onClick={()=>router.push("/")} style={{ background:"none",border:"none",color:MUTED,fontFamily:"var(--font-mono)",fontSize:"0.72rem",cursor:"pointer",letterSpacing:"0.08em" }}>← winter<span style={{ color:ICE }}>cast</span></button>
         <div style={{ color:MUTED,fontSize:"0.68rem",letterSpacing:"0.1em" }}>WALLET TRACKER</div>
         <div style={{ width:80 }} />
@@ -80,24 +80,24 @@ export default function TrackPage() {
             <button onClick={()=>setSuccess(false)} style={{ marginTop:"1.5rem",background:"transparent",border:`1px solid ${BORDER}`,color:ICE,fontFamily:"var(--font-mono)",fontSize:"0.72rem",padding:"0.6rem 1.5rem",cursor:"pointer",letterSpacing:"0.08em",textTransform:"uppercase" }}>Track Another →</button>
           </div>
         ) : (
-          <div style={{ background:BG2,border:`1px solid rgba(96,165,250,0.2)`,borderTop:`2px solid ${ICE}`,padding:"2rem",marginBottom:"2rem" }}>
+          <div style={{ background:BG2,border:`1px solid rgba(153,69,255,0.2)`,borderTop:`2px solid ${ICE}`,padding:"2rem",marginBottom:"2rem" }}>
             <div style={{ display:"flex",flexDirection:"column",gap:"1rem" }}>
               <div>
                 <div style={{ color:MUTED,fontSize:"0.6rem",letterSpacing:"0.1em",textTransform:"uppercase",marginBottom:"0.5rem" }}>Wallet Address</div>
                 <input value={address} onChange={e=>setAddress(e.target.value)} placeholder="0x... or Solana address"
-                  style={{ width:"100%",background:"rgba(96,165,250,0.05)",border:`1px solid rgba(96,165,250,0.2)`,color:TEXT,fontFamily:"var(--font-mono)",fontSize:"0.78rem",padding:"0.85rem 1rem",outline:"none" }} />
+                  style={{ width:"100%",background:"rgba(153,69,255,0.05)",border:`1px solid rgba(153,69,255,0.2)`,color:TEXT,fontFamily:"var(--font-mono)",fontSize:"0.78rem",padding:"0.85rem 1rem",outline:"none" }} />
               </div>
               <div>
                 <div style={{ color:MUTED,fontSize:"0.6rem",letterSpacing:"0.1em",textTransform:"uppercase",marginBottom:"0.5rem" }}>Your Email</div>
                 <input value={email} onChange={e=>setEmail(e.target.value)} placeholder="you@example.com" type="email"
-                  style={{ width:"100%",background:"rgba(96,165,250,0.05)",border:`1px solid rgba(96,165,250,0.2)`,color:TEXT,fontFamily:"var(--font-mono)",fontSize:"0.78rem",padding:"0.85rem 1rem",outline:"none" }} />
+                  style={{ width:"100%",background:"rgba(153,69,255,0.05)",border:`1px solid rgba(153,69,255,0.2)`,color:TEXT,fontFamily:"var(--font-mono)",fontSize:"0.78rem",padding:"0.85rem 1rem",outline:"none" }} />
               </div>
               <div>
                 <div style={{ color:MUTED,fontSize:"0.6rem",letterSpacing:"0.1em",textTransform:"uppercase",marginBottom:"0.5rem" }}>Alert Threshold (USD)</div>
                 <div style={{ display:"flex",gap:"0.5rem",flexWrap:"wrap" }}>
                   {[["10000","$10K"],["50000","$50K"],["100000","$100K"],["1000000","$1M"]].map(([val,label])=>(
                     <button key={val} onClick={()=>setThreshold(val)}
-                      style={{ background:threshold===val?"rgba(96,165,250,0.15)":BG2,border:`1px solid ${threshold===val?"rgba(96,165,250,0.4)":BORDER}`,color:threshold===val?ICE:MUTED,fontFamily:"var(--font-mono)",fontSize:"0.72rem",padding:"0.5rem 1rem",cursor:"pointer",letterSpacing:"0.06em" }}>
+                      style={{ background:threshold===val?"rgba(153,69,255,0.15)":BG2,border:`1px solid ${threshold===val?"rgba(153,69,255,0.4)":BORDER}`,color:threshold===val?ICE:MUTED,fontFamily:"var(--font-mono)",fontSize:"0.72rem",padding:"0.5rem 1rem",cursor:"pointer",letterSpacing:"0.06em" }}>
                       {label}
                     </button>
                   ))}
@@ -105,7 +105,7 @@ export default function TrackPage() {
               </div>
               {error && <div style={{ color:"#f87171",fontSize:"0.72rem" }}>{error}</div>}
               <button onClick={handleTrack} disabled={loading}
-                style={{ background:ICE,color:BG,border:"none",fontFamily:"var(--font-mono)",fontSize:"0.78rem",fontWeight:700,padding:"0.9rem",cursor:"pointer",letterSpacing:"0.08em",textTransform:"uppercase",opacity:loading?0.6:1 }}>
+                style={{ background:"linear-gradient(135deg,#9945ff,#627eea)",color:"#fff",border:"none",fontFamily:"var(--font-mono)",fontSize:"0.78rem",fontWeight:700,padding:"0.9rem",cursor:"pointer",letterSpacing:"0.08em",textTransform:"uppercase",opacity:loading?0.6:1 }}>
                 {loading?"SETTING UP TRACKER...":"Track Wallet →"}
               </button>
             </div>

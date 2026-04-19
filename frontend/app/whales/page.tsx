@@ -2,12 +2,12 @@
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 
-const ICE = "#60a5fa"
-const BG = "#050810"
-const BG2 = "rgba(96,165,250,0.04)"
-const BORDER = "rgba(96,165,250,0.12)"
+const ICE = "#9945ff"
+const BG = "#0a0520"
+const BG2 = "rgba(153,69,255,0.04)"
+const BORDER = "rgba(153,69,255,0.12)"
 const TEXT = "#e2eaf7"
-const MUTED = "rgba(226,234,247,0.4)"
+const MUTED = "rgba(241,245,249,0.4)"
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://wintercast-production.up.railway.app"
 
 const CHAIN_COLORS: Record<string, string> = {
@@ -111,10 +111,10 @@ export default function WhalesPage() {
 
   return (
     <main style={{ background: BG, minHeight: "100vh", color: TEXT, fontFamily: "var(--font-mono)" }}>
-      <div style={{ position: "fixed", inset: 0, pointerEvents: "none", zIndex: 0, background: "radial-gradient(ellipse 120% 60% at 50% -10%, rgba(96,165,250,0.06) 0%, transparent 70%)" }} />
+      <div style={{ position: "fixed", inset: 0, pointerEvents: "none", zIndex: 0, background: "radial-gradient(ellipse 120% 60% at 50% -10%, rgba(153,69,255,0.06) 0%, transparent 70%)" }} />
 
       {/* Nav */}
-      <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 50, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "1.1rem 2rem", background: "rgba(5,8,16,0.9)", backdropFilter: "blur(16px)", borderBottom: `1px solid ${BORDER}` }}>
+      <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 50, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "1.1rem 2rem", background: "rgba(10,5,32,0.9)", backdropFilter: "blur(16px)", borderBottom: `1px solid ${BORDER}` }}>
         <button onClick={() => router.push("/")} style={{ background: "none", border: "none", color: MUTED, fontFamily: "var(--font-mono)", fontSize: "0.72rem", cursor: "pointer", letterSpacing: "0.08em" }}>← winter<span style={{ color: ICE }}>cast</span></button>
         <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
           <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#4ade80", display: "inline-block", animation: "pulse 2s infinite" }} />
@@ -168,7 +168,7 @@ export default function WhalesPage() {
           <div style={{ display: "flex", flexDirection: "column", gap: 1, background: BORDER, border: `1px solid ${BORDER}` }}>
             {moves.map((move, i) => (
               <div key={move.hash || i} style={{ background: BG, padding: "1.25rem", display: "flex", alignItems: "center", gap: "1rem", flexWrap: "wrap", transition: "background 0.2s" }}
-                onMouseEnter={e => (e.currentTarget.style.background = "rgba(96,165,250,0.04)")}
+                onMouseEnter={e => (e.currentTarget.style.background = "rgba(153,69,255,0.04)")}
                 onMouseLeave={e => (e.currentTarget.style.background = BG)}>
 
                 {/* Chain badge */}

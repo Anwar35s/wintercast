@@ -2,12 +2,12 @@
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 
-const ICE = "#60a5fa"
-const BG = "#050810"
-const BG2 = "rgba(96,165,250,0.04)"
-const BORDER = "rgba(96,165,250,0.12)"
+const ICE = "#9945ff"
+const BG = "#0a0520"
+const BG2 = "rgba(153,69,255,0.04)"
+const BORDER = "rgba(153,69,255,0.12)"
 const TEXT = "#e2eaf7"
-const MUTED = "rgba(226,234,247,0.4)"
+const MUTED = "rgba(241,245,249,0.4)"
 const API_URL = "https://wintercast-production.up.railway.app"
 
 const SMART_MONEY = [
@@ -44,7 +44,7 @@ export default function CopyPage() {
 
   return (
     <main style={{ background:BG,minHeight:"100vh",color:TEXT,fontFamily:"var(--font-mono)" }}>
-      <nav style={{ position:"fixed",top:0,left:0,right:0,zIndex:50,display:"flex",alignItems:"center",justifyContent:"space-between",padding:"1rem 1.5rem",background:"rgba(5,8,16,0.95)",backdropFilter:"blur(16px)",borderBottom:`1px solid ${BORDER}` }}>
+      <nav style={{ position:"fixed",top:0,left:0,right:0,zIndex:50,display:"flex",alignItems:"center",justifyContent:"space-between",padding:"1rem 1.5rem",background:"rgba(10,5,32,0.95)",backdropFilter:"blur(16px)",borderBottom:`1px solid ${BORDER}` }}>
         <button onClick={()=>router.push("/")} style={{ background:"none",border:"none",color:MUTED,fontFamily:"var(--font-mono)",fontSize:"0.72rem",cursor:"pointer",letterSpacing:"0.08em" }}>← winter<span style={{ color:ICE }}>cast</span></button>
         <div style={{ color:MUTED,fontSize:"0.68rem",letterSpacing:"0.1em" }}>COPY TRADING</div>
         <div style={{ width:80 }} />
@@ -58,13 +58,13 @@ export default function CopyPage() {
         </p>
 
         {/* Follow custom wallet */}
-        <div style={{ background:BG2,border:`1px solid rgba(96,165,250,0.2)`,borderTop:`2px solid ${ICE}`,padding:"1.5rem",marginBottom:"2rem" }}>
+        <div style={{ background:BG2,border:`1px solid rgba(153,69,255,0.2)`,borderTop:`2px solid ${ICE}`,padding:"1.5rem",marginBottom:"2rem" }}>
           <div style={{ color:ICE,fontSize:"0.6rem",letterSpacing:"0.15em",textTransform:"uppercase",marginBottom:"1rem" }}>// Follow any wallet</div>
           <div style={{ display:"flex",gap:"0.75rem" }}>
             <input value={customAddr} onChange={e=>setCustomAddr(e.target.value)} placeholder="0x... or Solana address"
-              style={{ flex:1,background:"rgba(96,165,250,0.05)",border:`1px solid rgba(96,165,250,0.2)`,color:TEXT,fontFamily:"var(--font-mono)",fontSize:"0.78rem",padding:"0.75rem 1rem",outline:"none" }} />
+              style={{ flex:1,background:"rgba(153,69,255,0.05)",border:`1px solid rgba(153,69,255,0.2)`,color:TEXT,fontFamily:"var(--font-mono)",fontSize:"0.78rem",padding:"0.75rem 1rem",outline:"none" }} />
             <button onClick={()=>{ if(customAddr.trim()){follow(customAddr.trim());setCustomAddr("")} }}
-              style={{ background:ICE,color:BG,border:"none",fontFamily:"var(--font-mono)",fontSize:"0.72rem",fontWeight:700,padding:"0.75rem 1.25rem",cursor:"pointer",letterSpacing:"0.08em",textTransform:"uppercase",whiteSpace:"nowrap" }}>
+              style={{ background:"linear-gradient(135deg,#9945ff,#627eea)",color:"#fff",border:"none",fontFamily:"var(--font-mono)",fontSize:"0.72rem",fontWeight:700,padding:"0.75rem 1.25rem",cursor:"pointer",letterSpacing:"0.08em",textTransform:"uppercase",whiteSpace:"nowrap" }}>
               Follow →
             </button>
           </div>

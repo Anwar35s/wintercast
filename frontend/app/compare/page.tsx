@@ -3,12 +3,12 @@ import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { analyseWallet } from "@/lib/api"
 
-const ICE = "#60a5fa"
-const BG = "#050810"
-const BG2 = "rgba(96,165,250,0.04)"
-const BORDER = "rgba(96,165,250,0.12)"
+const ICE = "#9945ff"
+const BG = "#0a0520"
+const BG2 = "rgba(153,69,255,0.04)"
+const BORDER = "rgba(153,69,255,0.12)"
 const TEXT = "#e2eaf7"
-const MUTED = "rgba(226,234,247,0.4)"
+const MUTED = "rgba(241,245,249,0.4)"
 
 interface Profile {
   address: string
@@ -62,7 +62,7 @@ export default function ComparePage() {
     )
     const short = `${profile.address.slice(0,6)}...${profile.address.slice(-4)}`
     return (
-      <div style={{ flex: 1, background: BG2, border: `1px solid rgba(96,165,250,0.2)`, borderTop: `2px solid ${ICE}`, padding: "1.75rem" }}>
+      <div style={{ flex: 1, background: BG2, border: `1px solid rgba(153,69,255,0.2)`, borderTop: `2px solid ${ICE}`, padding: "1.75rem" }}>
         <div style={{ display: "flex", alignItems: "center", gap: "1rem", marginBottom: "1.5rem" }}>
           <span style={{ fontSize: "2rem" }}>{profile.archetype_icon}</span>
           <div>
@@ -96,7 +96,7 @@ export default function ComparePage() {
           ))}
         </div>
         <button onClick={() => router.push(`/profile/${encodeURIComponent(profile.address)}`)}
-          style={{ marginTop: "1.25rem", width: "100%", background: "rgba(96,165,250,0.1)", color: ICE, border: `1px solid rgba(96,165,250,0.2)`, fontFamily: "var(--font-mono)", fontSize: "0.68rem", padding: "0.65rem", cursor: "pointer", letterSpacing: "0.08em", textTransform: "uppercase" }}>
+          style={{ marginTop: "1.25rem", width: "100%", background: "rgba(153,69,255,0.1)", color: ICE, border: `1px solid rgba(153,69,255,0.2)`, fontFamily: "var(--font-mono)", fontSize: "0.68rem", padding: "0.65rem", cursor: "pointer", letterSpacing: "0.08em", textTransform: "uppercase" }}>
           Full Profile →
         </button>
       </div>
@@ -105,7 +105,7 @@ export default function ComparePage() {
 
   return (
     <main style={{ background: BG, minHeight: "100vh", color: TEXT, fontFamily: "var(--font-mono)" }}>
-      <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 50, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "1.1rem 2rem", background: "rgba(5,8,16,0.9)", backdropFilter: "blur(16px)", borderBottom: `1px solid ${BORDER}` }}>
+      <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 50, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "1.1rem 2rem", background: "rgba(10,5,32,0.9)", backdropFilter: "blur(16px)", borderBottom: `1px solid ${BORDER}` }}>
         <button onClick={() => router.push("/")} style={{ background: "none", border: "none", color: MUTED, fontFamily: "var(--font-mono)", fontSize: "0.72rem", cursor: "pointer", letterSpacing: "0.08em" }}>← winter<span style={{ color: ICE }}>cast</span></button>
         <div style={{ color: MUTED, fontSize: "0.68rem", letterSpacing: "0.1em" }}>WALLET COMPARE</div>
         <div style={{ width: 80 }} />
@@ -120,21 +120,21 @@ export default function ComparePage() {
             <div style={{ color: MUTED, fontSize: "0.6rem", letterSpacing: "0.1em", marginBottom: "0.5rem" }}>WALLET 1</div>
             <input value={addr1} onChange={e => setAddr1(e.target.value)} onKeyDown={e => e.key === "Enter" && analyse()}
               placeholder="0x... or Solana address"
-              style={{ width: "100%", background: BG2, border: `1px solid rgba(96,165,250,0.2)`, color: TEXT, fontFamily: "var(--font-mono)", fontSize: "0.78rem", padding: "0.9rem 1rem", outline: "none" }} />
+              style={{ width: "100%", background: BG2, border: `1px solid rgba(153,69,255,0.2)`, color: TEXT, fontFamily: "var(--font-mono)", fontSize: "0.78rem", padding: "0.9rem 1rem", outline: "none" }} />
           </div>
           <div style={{ color: MUTED, fontSize: "0.85rem", fontFamily: "var(--font-display)", fontWeight: 700, paddingBottom: "0.5rem" }}>VS</div>
           <div>
             <div style={{ color: MUTED, fontSize: "0.6rem", letterSpacing: "0.1em", marginBottom: "0.5rem" }}>WALLET 2</div>
             <input value={addr2} onChange={e => setAddr2(e.target.value)} onKeyDown={e => e.key === "Enter" && analyse()}
               placeholder="0x... or Solana address"
-              style={{ width: "100%", background: BG2, border: `1px solid rgba(96,165,250,0.2)`, color: TEXT, fontFamily: "var(--font-mono)", fontSize: "0.78rem", padding: "0.9rem 1rem", outline: "none" }} />
+              style={{ width: "100%", background: BG2, border: `1px solid rgba(153,69,255,0.2)`, color: TEXT, fontFamily: "var(--font-mono)", fontSize: "0.78rem", padding: "0.9rem 1rem", outline: "none" }} />
           </div>
         </div>
 
         {error && <div style={{ color: "#f87171", fontSize: "0.72rem", marginBottom: "1rem" }}>{error}</div>}
 
         <button onClick={analyse} disabled={loading1 || loading2}
-          style={{ background: ICE, color: BG, border: "none", fontFamily: "var(--font-mono)", fontSize: "0.78rem", fontWeight: 700, padding: "0.85rem 2.5rem", cursor: "pointer", letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: "2rem", opacity: loading1 || loading2 ? 0.6 : 1 }}>
+          style={{ background: "linear-gradient(135deg,#9945ff,#627eea)", color: "#fff", border: "none", fontFamily: "var(--font-mono)", fontSize: "0.78rem", fontWeight: 700, padding: "0.85rem 2.5rem", cursor: "pointer", letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: "2rem", opacity: loading1 || loading2 ? 0.6 : 1 }}>
           {loading1 || loading2 ? "ANALYSING..." : "COMPARE WALLETS →"}
         </button>
 

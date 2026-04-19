@@ -2,12 +2,12 @@
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 
-const ICE = "#60a5fa"
-const BG = "#050810"
-const BG2 = "rgba(96,165,250,0.04)"
-const BORDER = "rgba(96,165,250,0.12)"
+const ICE = "#9945ff"
+const BG = "#0a0520"
+const BG2 = "rgba(153,69,255,0.04)"
+const BORDER = "rgba(153,69,255,0.12)"
 const TEXT = "#e2eaf7"
-const MUTED = "rgba(226,234,247,0.4)"
+const MUTED = "rgba(241,245,249,0.4)"
 const API_URL = "https://wintercast-production.up.railway.app"
 
 export default function GasPage() {
@@ -36,7 +36,7 @@ export default function GasPage() {
   return (
     <main style={{ background:BG,minHeight:"100vh",color:TEXT,fontFamily:"var(--font-mono)" }}>
       <div style={{ position:"fixed",inset:0,pointerEvents:"none",zIndex:0,background:"radial-gradient(ellipse 120% 60% at 50% -10%, rgba(96,165,250,0.07) 0%, transparent 70%)" }} />
-      <nav style={{ position:"fixed",top:0,left:0,right:0,zIndex:50,display:"flex",alignItems:"center",justifyContent:"space-between",padding:"1rem 1.5rem",background:"rgba(5,8,16,0.95)",backdropFilter:"blur(16px)",borderBottom:`1px solid ${BORDER}` }}>
+      <nav style={{ position:"fixed",top:0,left:0,right:0,zIndex:50,display:"flex",alignItems:"center",justifyContent:"space-between",padding:"1rem 1.5rem",background:"rgba(10,5,32,0.95)",backdropFilter:"blur(16px)",borderBottom:`1px solid ${BORDER}` }}>
         <button onClick={()=>router.push("/")} style={{ background:"none",border:"none",color:MUTED,fontFamily:"var(--font-mono)",fontSize:"0.72rem",cursor:"pointer",letterSpacing:"0.08em" }}>← winter<span style={{ color:ICE }}>cast</span></button>
         <div style={{ display:"flex",alignItems:"center",gap:"0.5rem" }}>
           <span style={{ width:7,height:7,borderRadius:"50%",background:"#4ade80",display:"inline-block",animation:"pulse 2s infinite" }} />

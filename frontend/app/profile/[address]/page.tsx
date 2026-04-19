@@ -20,15 +20,15 @@ interface Profile {
   vs_average: Record<string, { you: number; avg: number }>
 }
 
-const ICE = "#60a5fa"
-const ICE2 = "#93c5fd"
-const BG = "#050810"
-const BG2 = "rgba(96,165,250,0.04)"
-const BORDER = "rgba(96,165,250,0.12)"
+const ICE = "#9945ff"
+const ICE2 = "#c084fc"
+const BG = "#0a0520"
+const BG2 = "rgba(153,69,255,0.04)"
+const BORDER = "rgba(153,69,255,0.12)"
 const BORDER2 = "rgba(96,165,250,0.22)"
 const TEXT = "#e2eaf7"
-const MUTED = "rgba(226,234,247,0.4)"
-const MUTED2 = "rgba(226,234,247,0.2)"
+const MUTED = "rgba(241,245,249,0.4)"
+const MUTED2 = "rgba(241,245,249,0.2)"
 
 const LOADING_STEPS = [
   "CONNECTING TO CHAIN...",
@@ -102,14 +102,14 @@ export default function ProfilePage({ params }: { params: { address: string } })
 
   return (
     <main style={{ background: BG, minHeight: "100vh", color: TEXT, fontFamily: "var(--font-mono)" }}>
-      <div style={{ position: "fixed", inset: 0, pointerEvents: "none", zIndex: 0, background: "radial-gradient(ellipse 100% 50% at 50% 0%, rgba(96,165,250,0.05) 0%, transparent 60%)" }} />
+      <div style={{ position: "fixed", inset: 0, pointerEvents: "none", zIndex: 0, background: "radial-gradient(ellipse 100% 50% at 50% 0%, rgba(153,69,255,0.05) 0%, transparent 60%)" }} />
 
       {/* Nav */}
-      <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 50, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "1.1rem 2.5rem", background: "rgba(5,8,16,0.9)", backdropFilter: "blur(16px)", borderBottom: `1px solid ${BORDER}` }}>
+      <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 50, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "1.1rem 2.5rem", background: "rgba(10,5,32,0.9)", backdropFilter: "blur(16px)", borderBottom: `1px solid ${BORDER}` }}>
         <button onClick={() => router.push("/")} style={{ background: "none", border: "none", color: MUTED, fontFamily: "var(--font-mono)", fontSize: "0.72rem", cursor: "pointer", letterSpacing: "0.08em", display: "flex", alignItems: "center", gap: "0.5rem" }}>← winter<span style={{ color: ICE }}>cast</span></button>
         <div style={{ color: MUTED2, fontSize: "0.65rem", letterSpacing: "0.1em" }}>{short}</div>
         <button onClick={() => navigator.clipboard.writeText(window.location.href)}
-          style={{ background: ICE, color: BG, border: "none", fontFamily: "var(--font-mono)", fontSize: "0.68rem", fontWeight: 700, padding: "0.45rem 1rem", cursor: "pointer", letterSpacing: "0.08em", textTransform: "uppercase" }}>
+          style={{ background: "linear-gradient(135deg,#9945ff,#627eea)", color: "#fff", border: "none", fontFamily: "var(--font-mono)", fontSize: "0.68rem", fontWeight: 700, padding: "0.45rem 1rem", cursor: "pointer", letterSpacing: "0.08em", textTransform: "uppercase" }}>
           Share ↗
         </button>
       </nav>
@@ -118,14 +118,14 @@ export default function ProfilePage({ params }: { params: { address: string } })
 
         {/* Header */}
         <div style={{ display: "flex", alignItems: "flex-start", gap: "2rem", background: BG2, border: `1px solid ${BORDER2}`, borderTop: `2px solid ${ICE}`, padding: "2.5rem", marginBottom: "1.5rem", position: "relative", flexWrap: "wrap" }}>
-          <div style={{ width: 72, height: 72, background: "rgba(96,165,250,0.1)", border: `1px solid ${BORDER2}`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: "2rem", flexShrink: 0 }}>
+          <div style={{ width: 72, height: 72, background: "rgba(153,69,255,0.1)", border: `1px solid ${BORDER2}`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: "2rem", flexShrink: 0 }}>
             {profile.archetype_icon}
           </div>
           <div style={{ flex: 1 }}>
             <div style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "2rem", letterSpacing: "-0.02em", marginBottom: "0.25rem" }}>{profile.archetype}</div>
             <div style={{ color: MUTED, fontSize: "0.7rem", letterSpacing: "0.06em", marginBottom: "1rem", fontFamily: "var(--font-mono)" }}>{short} · {profile.chain.toUpperCase()}</div>
             <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
-              <span style={{ background: "rgba(96,165,250,0.1)", color: ICE2, fontSize: "0.6rem", padding: "0.25rem 0.75rem", letterSpacing: "0.1em", textTransform: "uppercase" }}>{profile.chain.toUpperCase()}</span>
+              <span style={{ background: "rgba(153,69,255,0.1)", color: ICE2, fontSize: "0.6rem", padding: "0.25rem 0.75rem", letterSpacing: "0.1em", textTransform: "uppercase" }}>{profile.chain.toUpperCase()}</span>
               <span style={{ background: `${riskColor}18`, color: riskColor, fontSize: "0.6rem", padding: "0.25rem 0.75rem", letterSpacing: "0.1em", textTransform: "uppercase" }}>{profile.risk_level} RISK</span>
             </div>
           </div>
@@ -224,13 +224,13 @@ export default function ProfilePage({ params }: { params: { address: string } })
         </div>
 
         {/* Share */}
-        <div style={{ background: "rgba(96,165,250,0.06)", border: `1px solid ${BORDER2}`, padding: "1.75rem", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "1.5rem", flexWrap: "wrap" }}>
+        <div style={{ background: "rgba(153,69,255,0.06)", border: `1px solid ${BORDER2}`, padding: "1.75rem", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "1.5rem", flexWrap: "wrap" }}>
           <div>
             <div style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "1rem", marginBottom: "0.25rem" }}>Share your Wintercast</div>
             <div style={{ color: MUTED, fontSize: "0.72rem" }}>{profile.archetype_icon} {profile.archetype} · Score {profile.score} · Win Rate {profile.win_rate_pct}% — wintercast.io</div>
           </div>
           <button onClick={() => { navigator.clipboard.writeText(window.location.href); alert("Link copied!") }}
-            style={{ background: ICE, color: BG, border: "none", fontFamily: "var(--font-mono)", fontSize: "0.72rem", fontWeight: 700, padding: "0.75rem 1.75rem", cursor: "pointer", letterSpacing: "0.08em", textTransform: "uppercase", whiteSpace: "nowrap" }}>
+            style={{ background: "linear-gradient(135deg,#9945ff,#627eea)", color: "#fff", border: "none", fontFamily: "var(--font-mono)", fontSize: "0.72rem", fontWeight: 700, padding: "0.75rem 1.75rem", cursor: "pointer", letterSpacing: "0.08em", textTransform: "uppercase", whiteSpace: "nowrap" }}>
             Copy Share Link
           </button>
         </div>
@@ -260,7 +260,7 @@ function drawRadar(canvas: HTMLCanvasElement, traits: Record<string, number>) {
       i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y)
     }
     ctx.closePath()
-    ctx.strokeStyle = "rgba(96,165,250,0.1)"
+    ctx.strokeStyle = "rgba(153,69,255,0.1)"
     ctx.lineWidth = 1
     ctx.stroke()
   }
@@ -270,7 +270,7 @@ function drawRadar(canvas: HTMLCanvasElement, traits: Record<string, number>) {
     ctx.beginPath()
     ctx.moveTo(cx, cy)
     ctx.lineTo(cx + R * Math.cos(angle), cy + R * Math.sin(angle))
-    ctx.strokeStyle = "rgba(96,165,250,0.1)"
+    ctx.strokeStyle = "rgba(153,69,255,0.1)"
     ctx.lineWidth = 1
     ctx.stroke()
     ctx.fillStyle = "rgba(147,197,253,0.5)"
@@ -288,9 +288,9 @@ function drawRadar(canvas: HTMLCanvasElement, traits: Record<string, number>) {
     i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y)
   }
   ctx.closePath()
-  ctx.fillStyle = "rgba(96,165,250,0.12)"
+  ctx.fillStyle = "rgba(153,69,255,0.12)"
   ctx.fill()
-  ctx.strokeStyle = "#60a5fa"
+  ctx.strokeStyle = "#9945ff"
   ctx.lineWidth = 1.5
   ctx.stroke()
 
@@ -298,7 +298,7 @@ function drawRadar(canvas: HTMLCanvasElement, traits: Record<string, number>) {
     const angle = (i / N) * Math.PI * 2 - Math.PI / 2
     ctx.beginPath()
     ctx.arc(cx + R * values[i] * Math.cos(angle), cy + R * values[i] * Math.sin(angle), 3, 0, Math.PI * 2)
-    ctx.fillStyle = "#60a5fa"
+    ctx.fillStyle = "#9945ff"
     ctx.fill()
   }
 }

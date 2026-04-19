@@ -2,12 +2,12 @@
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 
-const ICE = "#60a5fa"
-const BG = "#050810"
-const BG2 = "rgba(96,165,250,0.04)"
-const BORDER = "rgba(96,165,250,0.12)"
+const ICE = "#9945ff"
+const BG = "#0a0520"
+const BG2 = "rgba(153,69,255,0.04)"
+const BORDER = "rgba(153,69,255,0.12)"
 const TEXT = "#e2eaf7"
-const MUTED = "rgba(226,234,247,0.4)"
+const MUTED = "rgba(241,245,249,0.4)"
 const API_URL = "https://wintercast-production.up.railway.app"
 
 interface Token {
@@ -72,7 +72,7 @@ export default function PortfolioPage({ params }: { params: { address: string } 
 
   return (
     <main style={{ background: BG, minHeight: "100vh", color: TEXT, fontFamily: "var(--font-mono)" }}>
-      <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 50, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "1.1rem 2rem", background: "rgba(5,8,16,0.9)", backdropFilter: "blur(16px)", borderBottom: `1px solid ${BORDER}` }}>
+      <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 50, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "1.1rem 2rem", background: "rgba(10,5,32,0.9)", backdropFilter: "blur(16px)", borderBottom: `1px solid ${BORDER}` }}>
         <button onClick={() => router.push(`/profile/${encodeURIComponent(address)}`)} style={{ background: "none", border: "none", color: MUTED, fontFamily: "var(--font-mono)", fontSize: "0.72rem", cursor: "pointer", letterSpacing: "0.08em" }}>← Profile</button>
         <div style={{ color: MUTED, fontSize: "0.68rem", letterSpacing: "0.1em" }}>PORTFOLIO X-RAY</div>
         <div style={{ color: MUTED, fontSize: "0.65rem" }}>{short}</div>
@@ -121,7 +121,7 @@ export default function PortfolioPage({ params }: { params: { address: string } 
             <div style={{ display: "flex", flexDirection: "column", gap: 1, background: BORDER, border: `1px solid ${BORDER}` }}>
               {portfolio.tokens.map((token, i) => (
                 <div key={token.token_address || i} style={{ background: BG, padding: "1rem 1.25rem", display: "flex", alignItems: "center", gap: "1rem", transition: "background 0.2s" }}
-                  onMouseEnter={e => (e.currentTarget.style.background = "rgba(96,165,250,0.04)")}
+                  onMouseEnter={e => (e.currentTarget.style.background = "rgba(153,69,255,0.04)")}
                   onMouseLeave={e => (e.currentTarget.style.background = BG)}>
                   {/* Rank */}
                   <div style={{ color: MUTED, fontSize: "0.65rem", minWidth: 24, textAlign: "right" }}>#{i+1}</div>
