@@ -19,7 +19,7 @@ const DEMO = [
 ]
 const API = "https://wintercast-production.up.railway.app"
 const CC: Record<string,string> = { eth:"#627eea",base:"#0052ff",bsc:"#f0b90b",solana:"#9945ff",polygon:"#8247e5",arbitrum:"#28a0f0" }
-const NAV = [["/whales","Whales"],["/token","Tokens"],["/track","Track"],["/gas","Gas"],["/leaderboard","Board"],["/copy","Copy"],["/market","📊 Market"],["/battle","⚔️ Battle"],["/hall","🏛️ Hall"],["/battle","⚔️ Battle"],["/hall","🏛️ Hall"],["/compare","Compare"],["/pricing","Pricing"]]
+const NAV = [["/whales","🐋 Whales"],["/token","🔍 Tokens"],["/track","📡 Track"],["/gas","⛽ Gas"],["/market","📊 Market"],["/battle","⚔️ Battle"],["/hall","🏛️ Hall"],["/compare","Compare"],["/pricing","Pricing"]],["/token","Tokens"],["/track","Track"],["/gas","Gas"],["/leaderboard","Board"],["/copy","Copy"],["/market","📊 Market"],["/battle","⚔️ Battle"],["/hall","🏛️ Hall"],["/battle","⚔️ Battle"],["/hall","🏛️ Hall"],["/compare","Compare"],["/pricing","Pricing"]]
 const STATS = [["2.4M+","Wallets","rgba(153,69,255,0.2)","rgba(153,69,255,0.4)","#c084fc"],["30+","Signals","rgba(98,126,234,0.2)","rgba(98,126,234,0.4)","#818cf8"],["8","Archetypes","rgba(247,147,26,0.2)","rgba(247,147,26,0.4)","#fb923c"],["6","Chains","rgba(40,160,240,0.2)","rgba(40,160,240,0.4)","#9945ff"]]
 
 export default function Home() {
