@@ -89,7 +89,7 @@ export default function Home() {
               <a href="/gas" style={{color:"rgba(241,245,249,0.3)",textDecoration:"none",fontSize:"0.62rem"}}>Full Tracker →</a>
             </div>
           )}
-          <p style={{display:"none"}}>
+          
           </p>
           {pp&&<div style={{display:"flex",alignItems:"center",gap:"0.75rem",background:"rgba(153,69,255,0.1)",border:"1px solid rgba(153,69,255,0.25)",padding:"0.65rem 1rem",width:"100%",maxWidth:560,marginBottom:"0.5rem",borderRadius:6}}>
             <span>💼</span>
