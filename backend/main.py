@@ -69,3 +69,6 @@ def stats(key: str = ""):
     if not MONITOR_KEY or key != MONITOR_KEY:
         raise HTTPException(status_code=403, detail="Forbidden")
     return {"blocked_ips": len(BLOCKED_IPS), "recent_requests": REQUEST_LOG[-50:]}
+
+from routers import market as market_router
+app.include_router(market_router.router, prefix="/api")

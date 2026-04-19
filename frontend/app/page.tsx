@@ -19,7 +19,7 @@ const DEMO = [
 ]
 const API = "https://wintercast-production.up.railway.app"
 const CC: Record<string,string> = { eth:"#627eea",base:"#0052ff",bsc:"#f0b90b",solana:"#9945ff",polygon:"#8247e5",arbitrum:"#28a0f0" }
-const NAV = [["/whales","Whales"],["/token","Tokens"],["/track","Track"],["/gas","Gas"],["/leaderboard","Board"],["/copy","Copy"],["/compare","Compare"],["/pricing","Pricing"]]
+const NAV = [["/whales","Whales"],["/token","Tokens"],["/track","Track"],["/gas","Gas"],["/leaderboard","Board"],["/copy","Copy"],["/market","📊 Market"],["/market","📊 Market"],["/compare","Compare"],["/pricing","Pricing"]]
 const STATS = [["2.4M+","Wallets","rgba(153,69,255,0.2)","rgba(153,69,255,0.4)","#c084fc"],["30+","Signals","rgba(98,126,234,0.2)","rgba(98,126,234,0.4)","#818cf8"],["8","Archetypes","rgba(247,147,26,0.2)","rgba(247,147,26,0.4)","#fb923c"],["6","Chains","rgba(40,160,240,0.2)","rgba(40,160,240,0.4)","#9945ff"]]
 
 export default function Home() {
@@ -162,7 +162,7 @@ export default function Home() {
       <footer style={{maxWidth:1100,margin:"0 auto",padding:"2rem 1.25rem 3rem",borderTop:"1px solid rgba(153,69,255,0.15)",display:"flex",justifyContent:"space-between",alignItems:"center",flexWrap:"wrap",gap:"1rem",position:"relative",zIndex:1}}>
         <div style={{fontFamily:"var(--font-display)",fontWeight:800,color:"#f1f5f9"}}>winter<span style={{color:"#9945ff"}}>cast</span></div>
         <div style={{display:"flex",gap:"1.5rem",flexWrap:"wrap"}}>
-          {[["/whales","Whales"],["/token","Tokens"],["/track","Track"],["/gas","Gas"],["/leaderboard","Board"],["/copy","Copy"],["/compare","Compare"],["/pricing","Pricing"],["mailto:hello@wintercast.io","Contact"]].map(([h,l])=><a key={l} href={h} style={{color:"rgba(241,245,249,0.3)",fontSize:"0.65rem",letterSpacing:"0.08em",textDecoration:"none"}}>{l}</a>)}
+          {[["/whales","Whales"],["/token","Tokens"],["/track","Track"],["/gas","Gas"],["/leaderboard","Board"],["/copy","Copy"],["/market","📊 Market"],["/market","📊 Market"],["/compare","Compare"],["/pricing","Pricing"],["mailto:hello@wintercast.io","Contact"]].map(([h,l])=><a key={l} href={h} style={{color:"rgba(241,245,249,0.3)",fontSize:"0.65rem",letterSpacing:"0.08em",textDecoration:"none"}}>{l}</a>)}
         </div>
         <div style={{color:"rgba(241,245,249,0.2)",fontSize:"0.62rem"}}>© 2026 Wintercast</div>
       </footer>
