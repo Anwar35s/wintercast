@@ -26,8 +26,8 @@ export default function Home() {
   }
 
   return (
-    <main style={{ background: "#050810", minHeight: "100vh", color: "#e2eaf7", fontFamily: "var(--font-mono)" }}>
-      <div style={{ position: "fixed", inset: 0, pointerEvents: "none", zIndex: 0, background: "radial-gradient(ellipse 120% 60% at 50% -10%, rgba(96,165,250,0.07) 0%, transparent 70%)" }} />
+    <main style={{ background: "#0a0520", minHeight: "100vh", color: "#e2eaf7", fontFamily: "var(--font-mono)" }}>
+      <div style={{ position: "fixed", inset: 0, pointerEvents: "none", zIndex: 0, background: "radial-gradient(ellipse 120% 60% at 50% -10%, rgba(153,69,255,0.15) 0%, transparent 60%), radial-gradient(ellipse 80% 60% at 80% 80%, rgba(98,126,234,0.12) 0%, transparent 50%)" }} />
 
       <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 50, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "1.25rem 2.5rem", background: "rgba(5,8,16,0.85)", backdropFilter: "blur(16px)", borderBottom: "1px solid rgba(96,165,250,0.1)" }}>
         <div style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "1.2rem", letterSpacing: "-0.02em" }}>
@@ -99,9 +99,9 @@ export default function Home() {
         <p style={{ color: "rgba(226,234,247,0.4)", fontSize: "0.82rem", lineHeight: 1.8, maxWidth: 480, marginBottom: "3rem" }}>Every wallet falls into one of 8 behavioural patterns. Our AI identifies exactly which one.</p>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))", gap: 1, background: "rgba(96,165,250,0.08)", border: "1px solid rgba(96,165,250,0.08)" }}>
           {ARCHETYPES.map(a => (
-            <div key={a.name} style={{ background: "rgba(5,8,16,0.95)", padding: "2rem", cursor: "pointer", transition: "background 0.2s" }}
+            <div key={a.name} style={{ background: "rgba(10,5,32,0.9)", padding: "2rem", cursor: "pointer", transition: "background 0.2s" }}
               onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.background = "rgba(96,165,250,0.05)" }}
-              onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.background = "rgba(5,8,16,0.95)" }}>
+              onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.background = "rgba(10,5,32,0.9)" }}>
               <div style={{ fontSize: "1.5rem", marginBottom: "1rem" }}>{a.icon}</div>
               <div style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "0.95rem", marginBottom: "0.5rem" }}>{a.name}</div>
               <div style={{ color: "rgba(226,234,247,0.4)", fontSize: "0.72rem", lineHeight: 1.7 }}>{a.desc}</div>
@@ -121,7 +121,7 @@ export default function Home() {
             ["02","AI reads 30+ signals","Win rate, hold time, risk exposure, DeFi activity, timing patterns — all analysed in seconds."],
             ["03","Get your forecast","Archetype, score, AI narrative, next-move predictions and a shareable card. Cold. Precise. Yours."],
           ].map(([n,t,d]) => (
-            <div key={n} style={{ background: "rgba(5,8,16,0.95)", padding: "2.5rem 2rem" }}>
+            <div key={n} style={{ background: "rgba(10,5,32,0.9)", padding: "2.5rem 2rem" }}>
               <div style={{ color: "#60a5fa", fontSize: "0.68rem", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "1.5rem" }}>Step {n}</div>
               <div style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "1.05rem", marginBottom: "0.75rem" }}>{t}</div>
               <div style={{ color: "rgba(226,234,247,0.4)", fontSize: "0.75rem", lineHeight: 1.8 }}>{d}</div>
