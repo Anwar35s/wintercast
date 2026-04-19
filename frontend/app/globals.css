@@ -67,3 +67,7 @@ a {
 .chain-bsc { color: #f0b90b; border-color: rgba(240,185,11,0.3); background: rgba(240,185,11,0.1); }
 .chain-polygon { color: #8247e5; border-color: rgba(130,71,229,0.3); background: rgba(130,71,229,0.1); }
 .chain-arbitrum { color: #28a0f0; border-color: rgba(40,160,240,0.3); background: rgba(40,160,240,0.1); }
+
+body {
+  background: #0a0520 !important;
+}
