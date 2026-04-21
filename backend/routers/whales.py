@@ -1,4 +1,5 @@
-from fastapi import APIRouter, Request
+from fastapi import APIRouter
+from services.wallet_labels import get_label, Request
 from slowapi import Limiter
 from slowapi.util import get_remote_address
 from services.whale_tracker import fetch_recent_whale_moves, fetch_solana_whale_moves
