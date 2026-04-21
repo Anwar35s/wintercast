@@ -48,7 +48,7 @@ export default function BattlePage() {
 
   return (
     <AnimatedLayout>
-    <main style={{background:BG,minHeight:"100vh",color:TEXT,fontFamily:"var(--font-mono)"}}>
+    <main style={{background:"rgba(0,0,0,0.85)",minHeight:"100vh",color:TEXT,fontFamily:"var(--font-mono)"}}>
       <div style={{position:"fixed",inset:0,pointerEvents:"none",zIndex:0,background:"radial-gradient(ellipse 60% 50% at 20% 50%, rgba(153,69,255,0.1) 0%, transparent 50%), radial-gradient(ellipse 60% 50% at 80% 50%, rgba(98,126,234,0.1) 0%, transparent 50%)"}}/>
       <nav style={{position:"fixed",top:0,left:0,right:0,zIndex:50,display:"flex",alignItems:"center",justifyContent:"space-between",padding:"1rem 1.5rem",background:"rgba(0,0,0,0.92)",backdropFilter:"blur(20px)",borderBottom:`1px solid ${BORDER}`}}>
         <button onClick={()=>router.push("/")} style={{background:"none",border:"none",color:MUTED,fontFamily:"var(--font-mono)",fontSize:"0.72rem",cursor:"pointer"}}>← winter<span style={{color:P}}>cast</span></button>

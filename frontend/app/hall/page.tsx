@@ -29,7 +29,7 @@ export default function HallPage() {
 
   return (
     <AnimatedLayout>
-    <main style={{background:BG,minHeight:"100vh",color:TEXT,fontFamily:"var(--font-mono)"}}>
+    <main style={{background:"rgba(0,0,0,0.85)",minHeight:"100vh",color:TEXT,fontFamily:"var(--font-mono)"}}>
       <div style={{position:"fixed",inset:0,pointerEvents:"none",zIndex:0,background:"radial-gradient(ellipse 80% 60% at 50% 10%, rgba(247,147,26,0.08) 0%, transparent 60%)"}}/>
       <nav style={{position:"fixed",top:0,left:0,right:0,zIndex:50,display:"flex",alignItems:"center",justifyContent:"space-between",padding:"1rem 1.5rem",background:"rgba(0,0,0,0.92)",backdropFilter:"blur(20px)",borderBottom:`1px solid ${BORDER}`}}>
         <button onClick={()=>router.push("/")} style={{background:"none",border:"none",color:MUTED,fontFamily:"var(--font-mono)",fontSize:"0.72rem",cursor:"pointer"}}>← winter<span style={{color:P}}>cast</span></button>

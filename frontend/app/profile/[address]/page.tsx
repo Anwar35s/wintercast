@@ -103,7 +103,7 @@ export default function ProfilePage({ params }: { params: { address: string } })
 
   return (
     <AnimatedLayout>
-    <main style={{ background: BG, minHeight: "100vh", color: TEXT, fontFamily: "var(--font-mono)" }}>
+    <main style={{ background: "rgba(0,0,0,0.85)", minHeight: "100vh", color: TEXT, fontFamily: "var(--font-mono)" }}>
       <div style={{ position: "fixed", inset: 0, pointerEvents: "none", zIndex: 0, background: "radial-gradient(ellipse 100% 50% at 50% 0%, rgba(153,69,255,0.05) 0%, transparent 60%)" }} />
 
       {/* Nav */}
