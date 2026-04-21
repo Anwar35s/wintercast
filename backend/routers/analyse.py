@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 from services.score_history import record_score
-from services.token_prices import get_prices, HTTPException, Request
+from services.token_prices import get_prices
 from slowapi import Limiter
 from slowapi.util import get_remote_address
 from models.wallet import AnalyseRequest, AnalyseResponse
