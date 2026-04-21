@@ -1,4 +1,4 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Request, HTTPException
 from services.score_history import record_score
 from services.token_prices import get_prices
 from slowapi import Limiter
