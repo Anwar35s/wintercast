@@ -40,6 +40,7 @@ async def analyse_wallet(request: Request, req: AnalyseRequest):
             features = extract_solana_features(raw_data)
 
         profile = await generate_profile(features)
+        record_score(req.address, profile.get("score",0), profile.get("archetype",""), profile.get("win_rate_pct",0), profile.get("risk_level",""))
         return AnalyseResponse(success=True, profile=profile)
 
     except HTTPException:
