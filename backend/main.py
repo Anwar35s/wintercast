@@ -4,7 +4,7 @@ from fastapi.responses import JSONResponse
 from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.util import get_remote_address
 from slowapi.errors import RateLimitExceeded
-from routers import analyse, leaderboard, whales, portfolio, tracking, token, gas, nft, pnl
+from routers import analyse, leaderboard, whales, portfolio, tracking, token, gas, nft, pnl, labels
 from services.security import check_honeypot, check_blocked, check_suspicious_headers, get_client_ip, log_request, log_security_event, REQUEST_LOG, BLOCKED_IPS, SUSPICIOUS_IPS
 import os, time, logging
 
@@ -71,4 +71,6 @@ def stats(key: str = ""):
     return {"blocked_ips": len(BLOCKED_IPS), "recent_requests": REQUEST_LOG[-50:]}
 
 from routers import market as market_router
+from routers import labels as labels_router
 app.include_router(market_router.router, prefix="/api")
+app.include_router(labels_router.router, prefix="/api")
