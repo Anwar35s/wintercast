@@ -1,4 +1,6 @@
-from fastapi import APIRouter, HTTPException, Request
+from fastapi import APIRouter
+from services.score_history import record_score
+from services.token_prices import get_prices, HTTPException, Request
 from slowapi import Limiter
 from slowapi.util import get_remote_address
 from models.wallet import AnalyseRequest, AnalyseResponse
@@ -71,3 +73,11 @@ async def get_ens_v2(address: str):
     name = await _resolve_ens(address)
     return {"address": address, "ens": name}
 
+
+
+@router.get("/history/{address}")
+@limiter.limit("30/minute")
+async def get_wallet_history(address: str, request: Request):
+    from services.score_history import get_history, get_score_change
+    change = get_score_change(address)
+    return {"success": True, "address": address, **change}

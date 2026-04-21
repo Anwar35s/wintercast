@@ -137,3 +137,10 @@ def search_labels(query: str) -> list:
         if query in info["label"].lower() or query in info["category"].lower():
             results.append({"address": addr, **info})
     return results[:20]
+
+# Import and merge extended labels
+try:
+    from services.wallet_labels_extended import EXTENDED_LABELS
+    KNOWN_LABELS.update(EXTENDED_LABELS)
+except:
+    pass
