@@ -1,5 +1,6 @@
 from fastapi import APIRouter
-from services.wallet_labels import get_label, Request
+from services.wallet_labels import get_label
+from fastapi import Request
 from slowapi import Limiter
 from slowapi.util import get_remote_address
 from services.whale_tracker import fetch_recent_whale_moves, fetch_solana_whale_moves
@@ -22,6 +23,11 @@ async def get_whale_feed(request: Request):
         evm_moves = await fetch_recent_whale_moves()
         sol_moves = await fetch_solana_whale_moves()
         all_moves = sorted(evm_moves + sol_moves, key=lambda x: x["value_usd"], reverse=True)[:20]
+        for m in all_moves:
+            fl = get_label(m.get("from_address",""))
+            tl = get_label(m.get("to_address",""))
+            if fl: m["from_label"] = f"{fl['icon']} {fl['label']}"
+            if tl: m["to_label"] = f"{tl['icon']} {tl['label']}"
         _cache = {"data": all_moves, "timestamp": now}
         return {"moves": all_moves, "cached": False, "next_refresh": CACHE_TTL}
     except Exception as e:
