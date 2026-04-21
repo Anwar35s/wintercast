@@ -231,6 +231,8 @@ export default function ProfilePage({ params }: { params: { address: string } })
             <div style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "1rem", marginBottom: "0.25rem" }}>Share your Wintercast</div>
             <div style={{ color: MUTED, fontSize: "0.72rem" }}>{profile.archetype_icon} {profile.archetype} · Score {profile.score} · Win Rate {profile.win_rate_pct}% — wintercast.io</div>
           </div>
+          <a href={`/activity/${address}`} style={{background:"rgba(153,69,255,0.1)",color:"#c084fc",border:"1px solid rgba(153,69,255,0.3)",fontFamily:"var(--font-mono)",fontSize:"0.68rem",fontWeight:700,padding:"0.5rem 1rem",textDecoration:"none",letterSpacing:"0.06em",borderRadius:4,display:"inline-block"}}>Activity</a>
+          <a href={`/pnl/${address}`} style={{background:"rgba(74,222,128,0.1)",color:"#4ade80",border:"1px solid rgba(74,222,128,0.3)",fontFamily:"var(--font-mono)",fontSize:"0.68rem",fontWeight:700,padding:"0.5rem 1rem",textDecoration:"none",letterSpacing:"0.06em",borderRadius:4,display:"inline-block"}}>PnL</a>
           <button onClick={() => { navigator.clipboard.writeText(window.location.href); alert("Link copied!") }}
             style={{ background: "linear-gradient(135deg,#9945ff,#627eea)", color: "#fff", border: "none", fontFamily: "var(--font-mono)", fontSize: "0.72rem", fontWeight: 700, padding: "0.75rem 1.75rem", cursor: "pointer", letterSpacing: "0.08em", textTransform: "uppercase", whiteSpace: "nowrap" }}>
             Copy Share Link
