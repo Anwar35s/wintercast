@@ -1,4 +1,5 @@
 "use client"
+import AnimatedLayout from "@/app/components/AnimatedLayout"
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 
@@ -46,9 +47,10 @@ export default function BattlePage() {
   ]
 
   return (
+    <AnimatedLayout>
     <main style={{background:BG,minHeight:"100vh",color:TEXT,fontFamily:"var(--font-mono)"}}>
       <div style={{position:"fixed",inset:0,pointerEvents:"none",zIndex:0,background:"radial-gradient(ellipse 60% 50% at 20% 50%, rgba(153,69,255,0.1) 0%, transparent 50%), radial-gradient(ellipse 60% 50% at 80% 50%, rgba(98,126,234,0.1) 0%, transparent 50%)"}}/>
-      <nav style={{position:"fixed",top:0,left:0,right:0,zIndex:50,display:"flex",alignItems:"center",justifyContent:"space-between",padding:"1rem 1.5rem",background:"rgba(10,5,32,0.9)",backdropFilter:"blur(20px)",borderBottom:`1px solid ${BORDER}`}}>
+      <nav style={{position:"fixed",top:0,left:0,right:0,zIndex:50,display:"flex",alignItems:"center",justifyContent:"space-between",padding:"1rem 1.5rem",background:"rgba(0,0,0,0.92)",backdropFilter:"blur(20px)",borderBottom:`1px solid ${BORDER}`}}>
         <button onClick={()=>router.push("/")} style={{background:"none",border:"none",color:MUTED,fontFamily:"var(--font-mono)",fontSize:"0.72rem",cursor:"pointer"}}>← winter<span style={{color:P}}>cast</span></button>
         <div style={{color:MUTED,fontSize:"0.68rem",letterSpacing:"0.1em"}}>⚔️ WALLET BATTLE</div>
         <div style={{width:80}}/>
@@ -91,7 +93,7 @@ export default function BattlePage() {
             {/* Fighter cards */}
             <div style={{display:"grid",gridTemplateColumns:"1fr auto 1fr",gap:"1rem",alignItems:"stretch",marginBottom:"1.5rem"}}>
               {[result.wallet1, result.wallet2].map((w,i)=>(
-                <div key={i} style={{background:result.winner?.address===w.address?"rgba(74,222,128,0.05)":"rgba(10,5,32,0.95)",border:`1px solid ${result.winner?.address===w.address?"rgba(74,222,128,0.3)":BORDER}`,padding:"1.5rem",borderRadius:6,textAlign:"center",position:"relative"}}>
+                <div key={i} style={{background:result.winner?.address===w.address?"rgba(74,222,128,0.05)":"rgba(0,0,0,0.95)",border:`1px solid ${result.winner?.address===w.address?"rgba(74,222,128,0.3)":BORDER}`,padding:"1.5rem",borderRadius:6,textAlign:"center",position:"relative"}}>
                   {result.winner?.address===w.address&&<div style={{position:"absolute",top:-12,left:"50%",transform:"translateX(-50%)",background:"#4ade80",color:"#050810",fontSize:"0.6rem",fontWeight:700,padding:"0.2rem 0.75rem",borderRadius:20,letterSpacing:"0.1em",whiteSpace:"nowrap"}}>🏆 WINNER</div>}
                   <div style={{fontSize:"2.5rem",marginBottom:"0.5rem"}}>{w.archetype_icon}</div>
                   <div style={{fontFamily:"var(--font-display)",fontWeight:700,fontSize:"1rem",color:TEXT,marginBottom:"0.25rem"}}>{w.archetype}</div>
@@ -132,5 +134,6 @@ export default function BattlePage() {
       </div>
       <style>{`*{box-sizing:border-box;margin:0;padding:0;}@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}`}</style>
     </main>
+    </AnimatedLayout>
   )
 }

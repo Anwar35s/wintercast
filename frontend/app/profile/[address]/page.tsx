@@ -1,4 +1,5 @@
 "use client"
+import AnimatedLayout from "@/app/components/AnimatedLayout"
 import { useEffect, useState, useRef } from "react"
 import { useRouter } from "next/navigation"
 import { analyseWallet } from "@/lib/api"
@@ -101,11 +102,12 @@ export default function ProfilePage({ params }: { params: { address: string } })
   if (!profile) return null
 
   return (
+    <AnimatedLayout>
     <main style={{ background: BG, minHeight: "100vh", color: TEXT, fontFamily: "var(--font-mono)" }}>
       <div style={{ position: "fixed", inset: 0, pointerEvents: "none", zIndex: 0, background: "radial-gradient(ellipse 100% 50% at 50% 0%, rgba(153,69,255,0.05) 0%, transparent 60%)" }} />
 
       {/* Nav */}
-      <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 50, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "1.1rem 2.5rem", background: "rgba(10,5,32,0.9)", backdropFilter: "blur(16px)", borderBottom: `1px solid ${BORDER}` }}>
+      <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 50, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "1.1rem 2.5rem", background: "rgba(0,0,0,0.92)", backdropFilter: "blur(16px)", borderBottom: `1px solid ${BORDER}` }}>
         <button onClick={() => router.push("/")} style={{ background: "none", border: "none", color: MUTED, fontFamily: "var(--font-mono)", fontSize: "0.72rem", cursor: "pointer", letterSpacing: "0.08em", display: "flex", alignItems: "center", gap: "0.5rem" }}>← winter<span style={{ color: ICE }}>cast</span></button>
         <div style={{ color: MUTED2, fontSize: "0.65rem", letterSpacing: "0.1em" }}>{short}</div>
         <button onClick={() => navigator.clipboard.writeText(window.location.href)}
@@ -238,6 +240,7 @@ export default function ProfilePage({ params }: { params: { address: string } })
       </div>
       <style>{`* { box-sizing: border-box; margin: 0; padding: 0; } @media (max-width: 700px) { div[style*="grid-template-columns: repeat(4"] { grid-template-columns: repeat(2, 1fr) !important; } div[style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; } }`}</style>
     </main>
+    </AnimatedLayout>
   )
 }
 

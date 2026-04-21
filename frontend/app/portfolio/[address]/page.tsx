@@ -1,4 +1,5 @@
 "use client"
+import AnimatedLayout from "@/app/components/AnimatedLayout"
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 
@@ -71,8 +72,9 @@ export default function PortfolioPage({ params }: { params: { address: string } 
   )
 
   return (
+    <AnimatedLayout>
     <main style={{ background: BG, minHeight: "100vh", color: TEXT, fontFamily: "var(--font-mono)" }}>
-      <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 50, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "1.1rem 2rem", background: "rgba(10,5,32,0.9)", backdropFilter: "blur(16px)", borderBottom: `1px solid ${BORDER}` }}>
+      <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 50, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "1.1rem 2rem", background: "rgba(0,0,0,0.92)", backdropFilter: "blur(16px)", borderBottom: `1px solid ${BORDER}` }}>
         <button onClick={() => router.push(`/profile/${encodeURIComponent(address)}`)} style={{ background: "none", border: "none", color: MUTED, fontFamily: "var(--font-mono)", fontSize: "0.72rem", cursor: "pointer", letterSpacing: "0.08em" }}>← Profile</button>
         <div style={{ color: MUTED, fontSize: "0.68rem", letterSpacing: "0.1em" }}>PORTFOLIO X-RAY</div>
         <div style={{ color: MUTED, fontSize: "0.65rem" }}>{short}</div>
@@ -164,5 +166,6 @@ export default function PortfolioPage({ params }: { params: { address: string } 
       </div>
       <style>{`* { box-sizing: border-box; margin: 0; padding: 0; } @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}`}</style>
     </main>
+    </AnimatedLayout>
   )
 }

@@ -1,4 +1,5 @@
 "use client"
+import AnimatedLayout from "@/app/components/AnimatedLayout"
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 
@@ -29,9 +30,10 @@ export default function TokenSearchPage() {
   }
 
   return (
+    <AnimatedLayout>
     <main style={{ background:BG,minHeight:"100vh",color:TEXT,fontFamily:"var(--font-mono)" }}>
       <div style={{ position:"fixed",inset:0,pointerEvents:"none",zIndex:0,background:"radial-gradient(ellipse 120% 60% at 50% -10%, rgba(96,165,250,0.07) 0%, transparent 70%)" }} />
-      <nav style={{ position:"fixed",top:0,left:0,right:0,zIndex:50,display:"flex",alignItems:"center",justifyContent:"space-between",padding:"1.1rem 2rem",background:"rgba(10,5,32,0.9)",backdropFilter:"blur(16px)",borderBottom:`1px solid ${BORDER}` }}>
+      <nav style={{ position:"fixed",top:0,left:0,right:0,zIndex:50,display:"flex",alignItems:"center",justifyContent:"space-between",padding:"1.1rem 2rem",background:"rgba(0,0,0,0.92)",backdropFilter:"blur(16px)",borderBottom:`1px solid ${BORDER}` }}>
         <button onClick={()=>router.push("/")} style={{ background:"none",border:"none",color:MUTED,fontFamily:"var(--font-mono)",fontSize:"0.72rem",cursor:"pointer",letterSpacing:"0.08em" }}>← winter<span style={{ color:ICE }}>cast</span></button>
         <div style={{ color:MUTED,fontSize:"0.68rem",letterSpacing:"0.1em" }}>TOKEN DEEP DIVE</div>
         <div style={{ width:80 }} />
@@ -69,5 +71,6 @@ export default function TokenSearchPage() {
       </div>
       <style>{`*{box-sizing:border-box;margin:0;padding:0;}`}</style>
     </main>
+    </AnimatedLayout>
   )
 }

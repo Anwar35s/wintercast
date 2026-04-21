@@ -1,4 +1,5 @@
 "use client"
+import AnimatedLayout from "@/app/components/AnimatedLayout"
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { analyseWallet } from "@/lib/api"
@@ -104,8 +105,9 @@ export default function ComparePage() {
   }
 
   return (
+    <AnimatedLayout>
     <main style={{ background: BG, minHeight: "100vh", color: TEXT, fontFamily: "var(--font-mono)" }}>
-      <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 50, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "1.1rem 2rem", background: "rgba(10,5,32,0.9)", backdropFilter: "blur(16px)", borderBottom: `1px solid ${BORDER}` }}>
+      <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 50, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "1.1rem 2rem", background: "rgba(0,0,0,0.92)", backdropFilter: "blur(16px)", borderBottom: `1px solid ${BORDER}` }}>
         <button onClick={() => router.push("/")} style={{ background: "none", border: "none", color: MUTED, fontFamily: "var(--font-mono)", fontSize: "0.72rem", cursor: "pointer", letterSpacing: "0.08em" }}>← winter<span style={{ color: ICE }}>cast</span></button>
         <div style={{ color: MUTED, fontSize: "0.68rem", letterSpacing: "0.1em" }}>WALLET COMPARE</div>
         <div style={{ width: 80 }} />
@@ -160,5 +162,6 @@ export default function ComparePage() {
       </div>
       <style>{`* { box-sizing: border-box; margin: 0; padding: 0; } @media (max-width: 600px) { div[style*="grid-template-columns: 1fr auto 1fr"] { grid-template-columns: 1fr !important; } div[style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; } }`}</style>
     </main>
+    </AnimatedLayout>
   )
 }
