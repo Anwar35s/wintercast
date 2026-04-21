@@ -4,7 +4,7 @@ import { useState } from "react"
 import { useRouter } from "next/navigation"
 
 const ICE = "#9945ff"
-const BG = "#0a0520"
+const BG = "transparent"
 const BG2 = "rgba(153,69,255,0.04)"
 const BORDER = "rgba(153,69,255,0.12)"
 const TEXT = "#e2eaf7"
@@ -31,7 +31,7 @@ export default function TokenSearchPage() {
 
   return (
     <AnimatedLayout>
-    <main style={{ background:"rgba(0,0,0,0.85)",minHeight:"100vh",color:TEXT,fontFamily:"var(--font-mono)" }}>
+    <main style={{ background:"transparent",minHeight:"100vh",color:TEXT,fontFamily:"var(--font-mono)" }}>
       <div style={{ position:"fixed",inset:0,pointerEvents:"none",zIndex:0,background:"radial-gradient(ellipse 120% 60% at 50% -10%, rgba(96,165,250,0.07) 0%, transparent 70%)" }} />
       <nav style={{ position:"fixed",top:0,left:0,right:0,zIndex:50,display:"flex",alignItems:"center",justifyContent:"space-between",padding:"1.1rem 2rem",background:"rgba(0,0,0,0.92)",backdropFilter:"blur(16px)",borderBottom:`1px solid ${BORDER}` }}>
         <button onClick={()=>router.push("/")} style={{ background:"none",border:"none",color:MUTED,fontFamily:"var(--font-mono)",fontSize:"0.72rem",cursor:"pointer",letterSpacing:"0.08em" }}>← winter<span style={{ color:ICE }}>cast</span></button>

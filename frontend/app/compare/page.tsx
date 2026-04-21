@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation"
 import { analyseWallet } from "@/lib/api"
 
 const ICE = "#9945ff"
-const BG = "#0a0520"
+const BG = "transparent"
 const BG2 = "rgba(153,69,255,0.04)"
 const BORDER = "rgba(153,69,255,0.12)"
 const TEXT = "#e2eaf7"

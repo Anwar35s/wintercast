@@ -23,7 +23,7 @@ interface Profile {
 
 const ICE = "#9945ff"
 const ICE2 = "#c084fc"
-const BG = "#0a0520"
+const BG = "transparent"
 const BG2 = "rgba(153,69,255,0.04)"
 const BORDER = "rgba(153,69,255,0.12)"
 const BORDER2 = "rgba(96,165,250,0.22)"

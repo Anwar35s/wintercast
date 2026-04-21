@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 
 const ICE = "#9945ff"
-const BG = "#0a0520"
+const BG = "transparent"
 const BG2 = "rgba(153,69,255,0.04)"
 const BORDER = "rgba(153,69,255,0.12)"
 const TEXT = "#e2eaf7"
@@ -37,7 +37,7 @@ export default function NFTPage({ params }: { params: { address: string } }) {
 
   return (
     <AnimatedLayout>
-    <main style={{ background:"rgba(0,0,0,0.85)",minHeight:"100vh",color:TEXT,fontFamily:"var(--font-mono)" }}>
+    <main style={{ background:"transparent",minHeight:"100vh",color:TEXT,fontFamily:"var(--font-mono)" }}>
       <nav style={{ position:"fixed",top:0,left:0,right:0,zIndex:50,display:"flex",alignItems:"center",justifyContent:"space-between",padding:"1rem 1.5rem",background:"rgba(0,0,0,0.95)",backdropFilter:"blur(16px)",borderBottom:`1px solid ${BORDER}` }}>
         <button onClick={()=>router.push(`/profile/${encodeURIComponent(address)}`)} style={{ background:"none",border:"none",color:MUTED,fontFamily:"var(--font-mono)",fontSize:"0.72rem",cursor:"pointer",letterSpacing:"0.08em" }}>← Profile</button>
         <div style={{ color:MUTED,fontSize:"0.68rem",letterSpacing:"0.1em" }}>NFT HOLDINGS</div>

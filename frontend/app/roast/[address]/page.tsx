@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 
 const P = "#9945ff"
-const BG = "#0a0520"
+const BG = "transparent"
 const BORDER = "rgba(153,69,255,0.15)"
 const TEXT = "#f1f5f9"
 const MUTED = "rgba(241,245,249,0.4)"
@@ -34,7 +34,7 @@ export default function RoastPage({ params }: { params: { address: string } }) {
 
   return (
     <AnimatedLayout>
-    <main style={{background:"rgba(0,0,0,0.85)",minHeight:"100vh",color:TEXT,fontFamily:"var(--font-mono)"}}>
+    <main style={{background:"transparent",minHeight:"100vh",color:TEXT,fontFamily:"var(--font-mono)"}}>
       <div style={{position:"fixed",inset:0,pointerEvents:"none",zIndex:0,background:"radial-gradient(ellipse 80% 60% at 50% 20%, rgba(248,113,113,0.08) 0%, transparent 60%)"}}/>
       <nav style={{position:"fixed",top:0,left:0,right:0,zIndex:50,display:"flex",alignItems:"center",justifyContent:"space-between",padding:"1rem 1.5rem",background:"rgba(0,0,0,0.92)",backdropFilter:"blur(20px)",borderBottom:`1px solid ${BORDER}`}}>
         <button onClick={()=>router.push(`/profile/${encodeURIComponent(address)}`)} style={{background:"none",border:"none",color:MUTED,fontFamily:"var(--font-mono)",fontSize:"0.72rem",cursor:"pointer"}}>← Profile</button>
