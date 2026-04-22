@@ -266,6 +266,7 @@ export default function ProfilePage({ params }: { params: { address: string } })
           </div>
           <div style={{ textAlign: "center", minWidth: 80 }}>
             <div style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "3rem", color: ICE, lineHeight: 1 }}>{profile.score}</div>
+            <div style={{color:"#9945ff",fontSize:"0.7rem",marginTop:"0.5rem"}}>History: {JSON.stringify(history?.data_points)} points</div>
             <ScoreChart history={history} />
             <div style={{ color: MUTED, fontSize: "0.58rem", letterSpacing: "0.12em", textTransform: "uppercase", marginTop: "0.25rem" }}>Score</div>
           </div>
