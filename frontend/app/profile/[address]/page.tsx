@@ -1,4 +1,5 @@
 "use client"
+const API = process.env.NEXT_PUBLIC_API_URL || "https://wintercast-production.up.railway.app"
 import AnimatedLayout from "@/app/components/AnimatedLayout"
 import { useEffect, useState, useRef } from "react"
 import { useRouter } from "next/navigation"
