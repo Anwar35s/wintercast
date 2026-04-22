@@ -251,7 +251,7 @@ export default function ProfilePage({ params }: { params: { address: string } })
 
         {/* Header */}
         <div style={{ display: "flex", alignItems: "flex-start", gap: "1.5rem", background: BG2, border: `1px solid ${BORDER2}`, borderTop: `2px solid ${chainAccent}`, padding: "1.75rem", marginBottom: "1rem", position: "relative", flexWrap: "wrap" }}>
-          <div style={{ width: 64, height: 64, background: "rgba(96,165,250,0.1)", border: `1px solid ${BORDER2}`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: "1.75rem", flexShrink: 0 }}>
+          <div style={{ width: 64, height: 64, background: "rgba(153,69,255,0.1)", border: `1px solid ${BORDER2}`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: "1.75rem", flexShrink: 0 }}>
             {profile.archetype_icon}
           </div>
           <div style={{ flex: 1, minWidth: 200 }}>
@@ -260,7 +260,7 @@ export default function ProfilePage({ params }: { params: { address: string } })
             {ensName ? <span style={{ color: ICE2 }}>{ensName} · </span> : null}{short} · {profile.chain.toUpperCase()}
           </div>
             <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
-              <span style={{ background: "rgba(96,165,250,0.1)", color: ICE2, fontSize: "0.58rem", padding: "0.2rem 0.65rem", letterSpacing: "0.1em", textTransform: "uppercase" }}>{profile.chain.toUpperCase()}</span>
+              <span style={{ background: "rgba(153,69,255,0.1)", color: ICE2, fontSize: "0.58rem", padding: "0.2rem 0.65rem", letterSpacing: "0.1em", textTransform: "uppercase" }}>{profile.chain.toUpperCase()}</span>
               <span style={{ background: `${riskColor}18`, color: riskColor, fontSize: "0.58rem", padding: "0.2rem 0.65rem", letterSpacing: "0.1em", textTransform: "uppercase" }}>{profile.risk_level} RISK</span>
             </div>
           </div>
@@ -360,7 +360,7 @@ export default function ProfilePage({ params }: { params: { address: string } })
         </div>
 
         {/* Share */}
-        <div style={{ background: "rgba(96,165,250,0.06)", border: `1px solid ${BORDER2}`, padding: "1.5rem", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "1rem", flexWrap: "wrap" }}>
+        <div style={{ background: "rgba(153,69,255,0.06)", border: `1px solid ${BORDER2}`, padding: "1.5rem", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "1rem", flexWrap: "wrap" }}>
           <div>
             <div style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "0.95rem", marginBottom: "0.25rem" }}>Share your Wintercast</div>
             <div style={{ color: MUTED, fontSize: "0.7rem" }}>{profile.archetype_icon} {profile.archetype} · Score {profile.score} · wintercast.io</div>
@@ -395,7 +395,7 @@ function drawRadar(canvas: HTMLCanvasElement, traits: Record<string, number>) {
       i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y)
     }
     ctx.closePath()
-    ctx.strokeStyle = "rgba(96,165,250,0.1)"
+    ctx.strokeStyle = "rgba(153,69,255,0.1)"
     ctx.lineWidth = 1
     ctx.stroke()
   }
@@ -404,7 +404,7 @@ function drawRadar(canvas: HTMLCanvasElement, traits: Record<string, number>) {
     ctx.beginPath()
     ctx.moveTo(cx, cy)
     ctx.lineTo(cx + R * Math.cos(angle), cy + R * Math.sin(angle))
-    ctx.strokeStyle = "rgba(96,165,250,0.1)"
+    ctx.strokeStyle = "rgba(153,69,255,0.1)"
     ctx.lineWidth = 1
     ctx.stroke()
     ctx.fillStyle = "rgba(147,197,253,0.5)"
@@ -421,16 +421,16 @@ function drawRadar(canvas: HTMLCanvasElement, traits: Record<string, number>) {
     i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y)
   }
   ctx.closePath()
-  ctx.fillStyle = "rgba(96,165,250,0.12)"
+  ctx.fillStyle = "rgba(153,69,255,0.12)"
   ctx.fill()
-  ctx.strokeStyle = "#60a5fa"
+  ctx.strokeStyle = "#9945ff"
   ctx.lineWidth = 1.5
   ctx.stroke()
   for (let i = 0; i < N; i++) {
     const angle = (i / N) * Math.PI * 2 - Math.PI / 2
     ctx.beginPath()
     ctx.arc(cx + R * values[i] * Math.cos(angle), cy + R * values[i] * Math.sin(angle), 3, 0, Math.PI * 2)
-    ctx.fillStyle = "#60a5fa"
+    ctx.fillStyle = "#9945ff"
     ctx.fill()
   }
 }
