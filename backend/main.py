@@ -14,7 +14,7 @@ app = FastAPI(title="Wintercast API", version="2.0.0", docs_url=None, redoc_url=
 app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
-ALLOWED_ORIGINS = ["https://wintercast.io","https://www.wintercast.io","https://wintercast.vercel.app"]
+ALLOWED_ORIGINS = ["https://wintercast.io","https://www.wintercast.io","https://wintercast.vercel.app","http://localhost:8082","http://localhost:3000","http://localhost:19006"]
 if os.environ.get("ENVIRONMENT") == "development":
     ALLOWED_ORIGINS.append("http://localhost:3000")
 
