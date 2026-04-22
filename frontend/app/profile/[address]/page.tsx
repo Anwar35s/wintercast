@@ -22,13 +22,13 @@ interface Profile {
   vs_average: Record<string, { you: number; avg: number }>
 }
 
-const ICE = "#60a5fa"
-const ICE2 = "#93c5fd"
+const ICE = "#9945ff"
+const ICE2 = "#c084fc"
 const BG = "transparent"
-const BG2 = "rgba(96,165,250,0.04)"
-const BORDER = "rgba(96,165,250,0.12)"
-const BORDER2 = "rgba(96,165,250,0.22)"
-const TEXT = "#e2eaf7"
+const BG2 = "rgba(153,69,255,0.06)"
+const BORDER = "rgba(153,69,255,0.15)"
+const BORDER2 = "rgba(153,69,255,0.25)"
+const TEXT = "#f1f5f9"
 const MUTED = "rgba(226,234,247,0.4)"
 const MUTED2 = "rgba(226,234,247,0.2)"
 
