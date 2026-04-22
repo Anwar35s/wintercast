@@ -62,7 +62,7 @@ function formatHoldTime(days: number): string {
 
 
 function ScoreChart({ history }: { history: any }) {
-  if (!history?.history || history.history.length < 2) return null
+  if (!history?.history || history.history.length < 1) return null
   const points = history.history
   const scores = points.map((p:any) => p.score)
   const max = Math.max(...scores), min = Math.min(...scores)
